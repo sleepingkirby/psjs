@@ -21,6 +21,7 @@
     "default_title": "psjs",
     "default_popup": "popup/menu.html"
   },
+  "options_page": "options/settings.html",
   "background": {
     "scripts": ["./background.js"],
     "persistent": true
