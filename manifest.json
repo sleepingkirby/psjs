@@ -1,0 +1,34 @@
+{
+  "manifest_version": 2,
+  "name": "psjs",
+  "version": "1.0",
+  "description": "Gets stuff from HTML as string",
+  "permissions": [
+    "storage",
+    "declarativeContent",
+    "activeTab",
+    "tabs",
+    "webRequest",
+    "<all_urls>"
+  ],
+  "icons": {
+    "96": "icons/icon-96.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "96":"icons/icon-96.png"
+    },
+    "default_title": "psjs",
+    "default_popup": "popup/menu.html"
+  },
+  "background": {
+    "scripts": ["./background.js"],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["./content_scripts/psjs.js"]
+    }
+  ]
+}

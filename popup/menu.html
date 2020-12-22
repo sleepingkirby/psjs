@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="menu.css"/>
+  </head>
+
+<body>
+  <div class="notify">
+  </div>
+
+  <div class="autoW">
+    <input type="checkbox" name="autoChck" id="autoChck" />
+    <span> auto grab</span>
+    <input type="checkbox" name="autoCChck" id="autoCChck" />
+    <span> auto clear</span>
+    <input type="checkbox" name="autoPgChck" id="autoPgChck" />
+    <span> auto grab on page load (instead of menu load)</span>
+  </div>
+
+  <div class="patt">
+    <input type="text" name="pattInput" id="pattInput" placeholder="some regex pattern here for HTML grab..." />
+    <input class="save" type="submit" name="saveBtn" value="save" />
+  </div>
+
+  <div class="patt">
+    <input type="checkbox" name="XHRChck" id="XHRChck" />
+    <span> on </span>
+ 
+    <input type="text" name="XHRPattInput" id="XHRPattInput" placeholder="some regex pattern here for XHR grab..." />
+    <input class="save" type="submit" name="saveXHRBtn" value="save" />
+  </div>
+
+  <div class="gap">
+    <input type="submit" id="pullBtn" name="pullBtn" value="V pull V" />
+  </div>
+
+  <div class="list">
+    <textarea id="listTxtAr" placeholder="results will show up here..." ></textarea>
+  </div>
+
+  <div class="copy">
+    <input type="submit" id="clearBtn" name="clearBtn" value="clear" />
+    <input type="submit" id="saveLBtn" name="saveLBtn" value="save" />
+    <input type="submit" id="cpyBtn" name="cpyBtn" value="copy to clipboard" />
+  </div>
+
+
+
+  <script src="menu.js"> </script>
+</body>
+
+</html>
