@@ -113,6 +113,8 @@
     } 
   }
 
+
+/*
     //auto pull 
     chrome.storage.local.get( null ,(item) => {
       if(item.hasOwnProperty('autoPgChck') && item.autoPgChck){
@@ -128,7 +130,8 @@
         autoPull(item);
         }
       }
-      /* a lot of pages these days change URL but not a change page.
+
+       a lot of pages these days change URL but not a change page.
         I haven't decided if "auto clear" means "clear on find" or "clear
         on new page" yet. Until then, this "clear on new page" is commented
         out 
@@ -140,9 +143,9 @@
           });
         }
       }
-      */
+      
     });
-
+*/
 
   chrome.runtime.onMessage.addListener(runOnMsg);
 })();
