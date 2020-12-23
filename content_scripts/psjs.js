@@ -147,6 +147,16 @@
     });
 */
 
+console.log("starting psjs");
+
+XMLHttpRequest.prototype.realSend = XMLHttpRequest.prototype.send;
+XMLHttpRequest.prototype.send = function(value) {
+    this.addEventListener("progress", function(){
+        console.log("==============>> testing xhr override");
+    }, false);
+    this.realSend(value);
+};
+
   chrome.runtime.onMessage.addListener(runOnMsg);
 })();
 

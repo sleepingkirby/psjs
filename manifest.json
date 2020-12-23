@@ -9,6 +9,8 @@
     "activeTab",
     "tabs",
     "webRequest",
+    "<all_urls>",
+    "webRequestBlocking",
     "<all_urls>"
   ],
   "icons": {
