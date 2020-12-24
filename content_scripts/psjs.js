@@ -149,13 +149,14 @@
 
 console.log("starting psjs");
 
-XMLHttpRequest.prototype.realSend = XMLHttpRequest.prototype.send;
-XMLHttpRequest.prototype.send = function(value) {
-    this.addEventListener("progress", function(){
-        console.log("==============>> testing xhr override");
-    }, false);
-    this.realSend(value);
-};
+
+//gracefully stop all javascript
+//throw new Error();
+//stops propagation of the event to prevent additional listeners from intercepting. 
+//don't forget to find all elements with oncontextmenu and remove it.
+//document.addEventListener('contextmenu',function(e){event.stopPropagation();}, true);
+
+
 
   chrome.runtime.onMessage.addListener(runOnMsg);
 })();

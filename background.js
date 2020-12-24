@@ -22,13 +22,17 @@ timeStamp: 1608739201986.1008
 type: "xmlhttprequest"
 url: "https://diaoshi.dehua-kuyun.com/20201012/19401_8688b4df/1000k/hls/48709064ea7000088.ts"
 __proto__: Object
- 
+
+
+types:
+"main_frame", "sub_frame", "stylesheet", "script", "image", "font", "object", "xmlhttprequest", "ping", "csp_report", "media", "websocket", or "other" 
 */
+
       chrome.webRequest.onBeforeRequest.addListener(
         function(details) {
         console.log("============>>");
         console.log(details);
-        //return {cancel: true}; 
+        //return {cancel: true}; //returning {cancel: true} will prevent/stop the network call
         },
         {urls: ["<all_urls>"]},['blocking']);
 
