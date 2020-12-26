@@ -226,9 +226,22 @@ function startListen(){
   }); 
 
 
+function startListen(){
+  document.addEventListener("click", (e) => {
+   switch(e.target.name){
+      case 'settings':
+        chrome.runtime.openOptionsPage();     
+      break;
+      default:
+      break;
+    }
+  });
+}
+
+
 
 chrome.tabs.executeScript({
-file: "/content_scripts/mewate.js"
+file: "/content_scripts/psjs.js"
 }, startListen);
 
 //alert(document.getElementsByName('auto').length);

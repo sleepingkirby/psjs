@@ -1,5 +1,55 @@
+
+body{
+background-color: #000000;
+color: #eeeeee;
+padding: 6px 6px 6px 6px;
+display: flex;
+justify-content: center;
+}
+
+input[type=checkout]{
+background-color: transparent;
+border: 2px solid #eeeeee;
+}
+
+div{
+display: flex;
+justify-content: space-around;
+align-items: center;
+}
+
+.pageWrap{
+display: table;
+min-width: 60vw;
+}
+
+#enable{
+justify-content: flex-end;
+}
+
+div > .fCol{
+flex-direction: column;
+}
+
+.olBox{
+display: block;
+border: 1px solid #eeeeee;
+border-radius: 8px;
+}
+
+
+.header{
+margin-bottom: 4px;
+justify-content: flex-start;
+padding: 8px;
+}
+
+.header > div {
+
+}
+
 .custDmnPat{
-background-color: #FFFFFF;
+background-color: transparent;
 border-spacing: 6px;
 border: 1px solid #E0E0E0;
 border-radius: 8px;

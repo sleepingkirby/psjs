@@ -13,7 +13,6 @@
     return;
   }
   window.hasRun = true;
-  window.hasModaled = false;
 
   
 
@@ -156,7 +155,13 @@ console.log("starting psjs");
 //don't forget to find all elements with oncontextmenu and remove it.
 //document.addEventListener('contextmenu',function(e){event.stopPropagation();}, true);
 
-
+XMLHttpRequest.prototype.realSend = XMLHttpRequest.prototype.send;
+XMLHttpRequest.prototype.send = function(value) {
+    this.addEventListener("progress", function(){
+        console.log("Loading");
+    }, false);
+    this.realSend(value);
+};
 
   chrome.runtime.onMessage.addListener(runOnMsg);
 })();

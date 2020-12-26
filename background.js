@@ -1,4 +1,4 @@
-'use strict';
+types:'use strict';
 
 chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
 
@@ -30,8 +30,8 @@ types:
 
       chrome.webRequest.onBeforeRequest.addListener(
         function(details) {
-        console.log("============>>");
-        console.log(details);
+        //console.log("============>>");
+        //console.log(details);
         //return {cancel: true}; //returning {cancel: true} will prevent/stop the network call
         },
         {urls: ["<all_urls>"]},['blocking']);
