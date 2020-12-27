@@ -55,6 +55,19 @@ console.log('butWhyMod: ' + str);
     }
 }
 
+
+function setMsg(el){
+    document.getElementById(el.getAttribute("msgId")).innerText=el.getAttribute("info");
+    document.getElementById(el.getAttribute("msgId")).style=el.getAttribute("msgStyl");
+}
+
+function clearMsg(el){
+    document.getElementById(el.getAttribute("msgId")).innerText="";
+    document.getElementById(el.getAttribute("msgId")).style="";
+}
+
+
+
 //main function
 function startListen(){
   document.addEventListener("click", (e) => {
@@ -88,6 +101,7 @@ function startListen(){
         });
       break;
       default:
+        
       break;
     }
   });
@@ -95,6 +109,9 @@ function startListen(){
 }
 
 
+
+
+/*
 //getting saved settings
 chrome.storage.local.get(null,(item) => {
 
@@ -139,6 +156,7 @@ chrome.storage.local.get(null,(item) => {
  //document.getElementsByClassName('custDmnPatTxt')[0].value=objToTxtAr(custDmnPatList);
  //document.getElementsByClassName('custDmnStyTxt')[0].value=objToTxtAr(custDmnStyList);
 });
+*/
 
 
 //running main function

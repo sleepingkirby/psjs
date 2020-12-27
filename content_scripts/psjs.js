@@ -153,7 +153,8 @@ console.log("starting psjs");
 //throw new Error();
 //stops propagation of the event to prevent additional listeners from intercepting. 
 //don't forget to find all elements with oncontextmenu and remove it.
-//document.addEventListener('contextmenu',function(e){event.stopPropagation();}, true);
+//window.addEventListener('contextmenu',function(e){e.stopPropagation();}, true);
+//window.addEventListener=funcion(){}; assigns a null function to event listener, stopping it to assign any new eventListener 
 
 XMLHttpRequest.prototype.realSend = XMLHttpRequest.prototype.send;
 XMLHttpRequest.prototype.send = function(value) {

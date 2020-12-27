@@ -3,6 +3,7 @@ body{
 background-color: #000000;
 color: #eeeeee;
 padding: 6px 6px 6px 6px;
+max-width: 100vw;
 display: flex;
 justify-content: center;
 }
@@ -16,114 +17,74 @@ div{
 display: flex;
 justify-content: space-around;
 align-items: center;
+box-sizing: border-box;
+text-align: justify;
 }
 
 .pageWrap{
 display: table;
-min-width: 60vw;
 }
 
 #enable{
 justify-content: flex-end;
 }
 
-div > .fCol{
-flex-direction: column;
+.openToolTip{
+display: flex;
+justify-content: space-around;
+align-items: center;
 }
+
+.toolTip{
+background-color: #333333;
+justify-content: center;
+align-items: center;
+margin-bottom: 8px;
+font-size: small;
+}
+
 
 .olBox{
 display: block;
 border: 1px solid #eeeeee;
 border-radius: 8px;
+padding-bottom: 4px;
+margin-top:8px;
 }
 
 
 .header{
-margin-bottom: 4px;
-justify-content: flex-start;
-padding: 8px;
+justify-content: center;
+align-items: flex-start;
+padding: 4px 6px 4px 6px;
+background-color: #333333;
+border-radius: 8px 8px 0px 0px;
+flex-direction: column;
 }
 
 .header > div {
-
 }
 
-.custDmnPat{
-background-color: transparent;
-border-spacing: 6px;
-border: 1px solid #E0E0E0;
-border-radius: 8px;
-width: 100%;
-margin-bottom: 20px;
+.subHeader{
+padding: 2px 6px 2px 6px;
+justify-content: flex-start;
+align-items: center;
 }
 
-.custDmnPat th,td{
-background-color: none;
-padding: 4px 0px 4px 8px;
+.chckLst{
+padding: 0px 10px 6px 10px;
+justify-content: flex-start;
 }
 
-.custDmnPat thead th {
-text-align: left;
-background-color: #F6F6F6;
+.chckLst > .fRow{
+margin-right: 10px;
 }
 
-.custDmnPatTxt{
-width: 100%;
-height: 100px;
-background-color: #FFFFFF;
-border: 1px solid #E0E0E0;
+.fRow > input[type="checkbox"]{
+margin-left: 6px;
 }
 
-.custDmnStyTxt{
-width: 100%;
-height: 100px;
-background-color: #FFFFFF;
-border: 1px solid #E0E0E0;
-}
 
-.custListTxt{
-width: 100%;
-height: 100px;
-background-color: #FFFFFF;
-border: 1px solid #E0E0E0;
-}
-
-.savePref{
-border: 1px solid #E0E0E0;
-border-radius: 4px;
-background-color: #FFFFFF;
-font-weight: 550;
-font-size: 12pt;
-padding: 6px 12px 6px 12px;
-}
-
-.notify{
-border: 1px solid #FFA4B2;
-border-radius: 3px;
-background-color: #FFD2D9;
-padding: 4px 4px 4px 4px;
-color: #FF3B5A;
-text-align: center;
-margin-bottom: 4px;
-opacity: 0;
-height: auto;
-max-height: 0px;
-margin-bottom: 0px;
-}
-
-#show{
-opacity: 1;
-max-height: 200px;
-margin-bottom: 10px;
-}
-
-#fadeOut{
-animation:opac 5s;
-opacity: 0;
-height: auto;
-max-height: 0px;
-margin-bottom: 0px;
-}
 
 @keyframes opac{
 0%{opacity:1; max-height: 200px; margin-bottom: 20px;}
