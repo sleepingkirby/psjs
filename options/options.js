@@ -101,7 +101,14 @@ function startListen(){
         });
       break;
       default:
-        
+        if( e.target.hasAttribute('msgId') && e.target.id == e.target.getAttribute('msgId')){
+          document.getElementById(e.target.getAttribute("msgId")).innerText="";
+          document.getElementById(e.target.getAttribute("msgId")).style="";
+        }
+        else if(e.target.hasAttribute('msgId') && e.target.hasAttribute('info') ){
+          document.getElementById(e.target.getAttribute("msgId")).innerText=e.target.getAttribute("info");
+          document.getElementById(e.target.getAttribute("msgId")).style=e.target.getAttribute("msgStyl");
+        }
       break;
     }
   });
