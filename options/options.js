@@ -1,4 +1,10 @@
 
+var eTypes=["abort", "afterprint", "animationend", "animationiteration", "animationstart", "beforeprint", "beforeunload", "blur", "canplay", "canplaythrough", "change", "click", "contextmenu", "copy", "cut", "dblclick", "drag", "dragend", "dragenter", "dragleave", "dragover", "dragstart", "drop", "durationchange", "ended", "error", "focus", "focusin", "focusout", "fullscreenchange", "fullscreenerror", "hashchange", "input", "invalid", "keydown", "keypress", "keyup", "load", "loadeddata", "loadedmetadata", "loadstart", "message", "mousedown", "mouseenter", "mouseleave", "mousemove", "mouseover", "mouseout", "mouseup", "mousewheel", "offline", "online", "open", "pagehide", "pageshow", "paste", "pause", "play", "playing", "popstate", "progress", "ratechange", "resize", "reset", "scroll", "search", "seeked", "seeking", "select", "show", "stalled", "storage", "submit", "suspend", "timeupdate", "toggle", "touchcancel", "touchend", "touchmove", "touchstart", "transitionend", "unload", "volumechange", "waiting", "wheel"];
+
+var xhrTypes=["main_frame", "sub_frame", "stylesheet", "script", "image", "font", "object", "xmlhttprequest", "ping", "csp_report", "media", "websocket", "other"];
+
+
+
 function addNewRow( className ){
 var tbl=document.getElementsByClassName(className);
 var newIn="";
@@ -53,6 +59,27 @@ console.log('butWhyMod: ' + str);
       }
     obj.appendChild(document.createTextNode(str)); 
     }
+}
+
+
+function genSelect(elId, arr){
+  if(!Array.isArray(arr)){
+  return false;
+  }
+
+let el = document.getElementById(elId);
+  if( el == null ){
+  return false;
+  } 
+ 
+  arr.forEach((a) => {
+  var node = document.createElement("option");
+  var textnode = document.createTextNode(a);
+  node.appendChild(textnode);
+  el.appendChild(node);
+  });
+
+return true;
 }
 
 
@@ -116,8 +143,6 @@ function startListen(){
 }
 
 
-
-
 /*
 //getting saved settings
 chrome.storage.local.get(null,(item) => {
@@ -167,4 +192,7 @@ chrome.storage.local.get(null,(item) => {
 
 
 //running main function
+
+genSelect("lstnEvents", eTypes);
+genSelect("xhrTypes", xhrTypes);
 startListen();

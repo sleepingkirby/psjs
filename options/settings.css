@@ -8,9 +8,11 @@ display: flex;
 justify-content: center;
 }
 
-input[type=checkout]{
+input{
 background-color: transparent;
-border: 2px solid #eeeeee;
+border: 1px solid #888888;
+border-radius: 4px;
+color: #888888;
 }
 
 div{
@@ -39,7 +41,6 @@ align-items: center;
 background-color: #333333;
 justify-content: center;
 align-items: center;
-margin-bottom: 8px;
 font-size: small;
 }
 
@@ -48,8 +49,12 @@ font-size: small;
 display: block;
 border: 1px solid #eeeeee;
 border-radius: 8px;
-padding-bottom: 4px;
-margin-top:8px;
+padding-bottom: 6px;
+margin-top: 8px;
+}
+
+.olBox > div{
+margin-bottom: 6px;
 }
 
 
@@ -69,10 +74,11 @@ flex-direction: column;
 padding: 2px 6px 2px 6px;
 justify-content: flex-start;
 align-items: center;
+background-color: #333333;
 }
 
 .chckLst{
-padding: 0px 10px 6px 10px;
+padding: 0px 10px 0px 10px;
 justify-content: flex-start;
 }
 
@@ -84,7 +90,50 @@ margin-right: 10px;
 margin-left: 6px;
 }
 
+.addLstn{
+justify-content: space-around;
+}
 
+.addLstn div{
+}
+
+.addLstn input[type=submit]{
+border: 1px solid #888888;
+border-radius: 4px;
+background-color: #000000;
+color: #888888;
+}
+
+.addLstn select{
+margin-left: 6px;
+color: #888888;
+background-color: #000000;
+border-radius: 4px;
+}
+
+.addLstn select > option{
+justify-content: center;
+color: #888888;
+background-color: #000000;
+}
+
+.addLstnTxt{
+padding: 0px 6px 0px 6px;
+}
+
+.addLstnTxt input{
+border: 1px solid #888888;
+border-radius: 4px;
+width: 100%;
+background-color: #000000;
+color: #888888;
+padding: 4px; 
+}
+
+.addLstnTxtSbmt{
+justify-content: flex-end;
+margin: 6px 6px 6px 6px;
+}
 
 @keyframes opac{
 0%{opacity:1; max-height: 200px; margin-bottom: 20px;}
