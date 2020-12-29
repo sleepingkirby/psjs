@@ -1,7 +1,7 @@
 
 body{
 background-color: #000000;
-color: #eeeeee;
+color: #888888;
 padding: 6px 6px 6px 6px;
 max-width: 100vw;
 display: flex;
@@ -23,6 +23,10 @@ box-sizing: border-box;
 text-align: justify;
 }
 
+textarea{
+box-sizing: border-box;
+}
+
 .pageWrap{
 display: table;
 }
@@ -38,16 +42,18 @@ align-items: center;
 }
 
 .toolTip{
-background-color: #333333;
+background-color: #FFD2D9;
+color: #FF3B5A;
 justify-content: center;
 align-items: center;
 font-size: small;
+opacity: 0.9;
 }
 
 
 .olBox{
 display: block;
-border: 1px solid #eeeeee;
+border: 1px solid #888888;
 border-radius: 8px;
 padding-bottom: 6px;
 margin-top: 8px;
@@ -133,6 +139,27 @@ padding: 4px;
 .addLstnTxtSbmt{
 justify-content: flex-end;
 margin: 6px 6px 6px 6px;
+}
+
+.ignrLst{
+flex-direction: column;
+padding: 6px 6px 0px 6px;
+}
+
+.ignrLst textarea{
+border: 1px solid #888888;
+border-radius: 4px;
+background-color: #000000;
+width: 100%;
+color: #888888;
+padding: 4px;
+min-height: 120px;
+}
+
+.ignrLst #ignrLstSbmt{
+width: 100%;
+justify-content: flex-end;
+margin-top: 6px;
 }
 
 @keyframes opac{

@@ -18,7 +18,7 @@
 
       <div class="olBox">
         <div class="header">
-          <div>Global settings:</div>
+          <div>global settings:</div>
         </div> 
  
         <div id="glblMsg" msgId="glblMsg"  class="toolTip" >
@@ -26,28 +26,28 @@
  
         <div class="chckLst">
           <div class="fRow">
-            <div msgId="glblMsg" msgStyl="padding: 6px 8px 6px 8px; margin-top: 1px;" info="This is the *NUCLEAR* option. Pages these days have ways to try to load things even when other scripts says to do otherwise. This will *LITERALLY BREAK THE JAVASCRIPT IN THE PAGE BY CALLING A BROKEN JAVASCRIPT SYNTAX.* Use only when a) you want *ALL* javascript to not run b) you don't care if you break the entire page to do it." >break js:  </div>
+            <div msgId="glblMsg" msgStyl="padding: 6px 8px 6px 8px; margin-top: 1px;" info="This is the *NUCLEAR* option. Pages these days have ways to try to load things even when other scripts says to do otherwise. This will *LITERALLY BREAK THE JAVASCRIPT IN THE PAGE BY CALLING A BROKEN JAVASCRIPT SYNTAX.* Use only when a) you want *ALL* javascript to not run b) you don't care if you break the entire page to do it." >break js: </div>
             <input id="breakJs" name="breakJs" type="checkbox" /> 
           </div>
     
           <div class="fRow">
-            <div msgId="glblMsg" msgId="glblMsg" msgStyl="padding: 6px 8px 6px 8px; margin-top: 1px;" info="This attempts to gracefully to tell javascript to end all scripts. It tells the page that an error was thrown so stop all execution. There may be ways to get around this, which is why the previous 'break js' options exits." >stop js:  </div>
+            <div msgId="glblMsg" msgId="glblMsg" msgStyl="padding: 6px 8px 6px 8px; margin-top: 1px;" info="This attempts to gracefully to tell javascript to end all scripts. It tells the page that an error was thrown so stop all execution. There may be ways to get around this, which is why the previous 'break js' options exits." >stop js: </div>
             <input id="stopJs" type="checkbox" /> 
           </div>
     
           <div class="fRow">
-            <div msgId="glblMsg" msgStyl="padding: 6px 8px 6px 8px; margin-top: 1px;" info="This overrides the existing ajax funtions with nothing functional. It'll send a console message that an attempt was made and where to and that's it." >prevent XHR/ajax:  </div>
+            <div msgId="glblMsg" msgStyl="padding: 6px 8px 6px 8px; margin-top: 1px;" info="This overrides the existing ajax funtions with nothing functional. It'll send a console message that an attempt was made and where to and that's it." >prevent xhr/ajax: </div>
             <input id="prvntXHR" type="checkbox" />
           </div>
   
           <div class="fRow">
-            <div msgId="glblMsg" msgStyl="padding: 6px 8px 6px 8px; margin-top: 1px;" info="This overrides the addEventListener() funtion with nothing functional. It'll send a console message that an attempt was made and where to and that's it." >prevent event listeners:  </div>
+            <div msgId="glblMsg" msgStyl="padding: 6px 8px 6px 8px; margin-top: 1px;" info="This overrides the addEventListener() funtion with nothing functional. It'll send a console message that an attempt was made and where to and that's it." >prevent event listeners: </div>
             <input id="prvntEventLstnr" type="checkbox" />
           </div>
         </div>
         
         <div class="subHeader"> 
-          <div msgId="glblMsg" msgStyl="padding: 6px 8px 6px 8px; margin-top: 1px;" info="Add event type to disable listeners to that event. This makes it so that things like right-click (contextmenu) can't be disabled." >Stop event propagation: </div>
+          <div msgId="glblMsg" msgStyl="padding: 6px 8px 6px 8px; margin-top: 1px;" info="Add event type to disable listeners to that event. This makes it so that things like right-click (contextmenu) can't be disabled. This is like the 'prevent event listener', but doesn't kill all the event listeners " >stop event propagation: </div>
         </div>
 
         <div class="addLstn">
@@ -63,12 +63,12 @@
         </div>
 
         <div class="addLstnTxt">
-          <input id="addLstnTxtInpt" type="text" />
+          <input id="addLstnTxtInpt" type="text" placeholder="ex. click|contextmenu|scroll"/>
           <input id="addLstnTxtInptSbmt" type="submit" value="save" style="margin-left: 6px; width:60px; " />
         </div>
 
         <div class="subHeader"> 
-          <div msgId="glblMsg" msgStyl="padding: 6px 8px 6px 8px; margin-top: 1px;" info="Add event type to disable listeners to that event. This makes it so that things like right-click (contextmenu) can't be disabled." >stop ajax/xhr calls: </div>
+          <div msgId="glblMsg" msgStyl="padding: 6px 8px 6px 8px; margin-top: 1px;" info="This allows you to stop certain XHR/ajax calls for a resource of a specific type." >stop network call types: </div>
         </div>
 
         <div class="addLstn">
@@ -84,14 +84,27 @@
         </div>
 
         <div class="addLstnTxt">
-          <input id="addLstnTxtInpt" type="text" />
-          <input id="addLstnTxtInptSbmt" type="submit" value="save" style="margin-left: 6px; width:60px; " />
+          <input id="addLstnTxtInpt" type="text" placeholder="ex. xmlhttprequest|media|websocket"/>
+          <input id="addLstnTxtInptSbmt" type="submit" value="save" style="margin-left: 6px; width:60px;" />
         </div>
-
-
       </div>
 
+      <div class="olBox">
+        <div class="header">
+          <div msgId="ignrLstMsg" msgStyl="padding: 6px 8px 6px 8px; margin-top: 1px;" info="domains to ignore.">ignore list:</div>
+        </div>
 
+        <div id="ignrLstMsg" msgId="ignrLstMsg"  class="toolTip" >
+        </div>
+
+        <div class="ignrLst">
+          <textarea id="ignrLstTA" type="text" placeholder="ex. gmail.com
+youtube.com"></textarea>
+          <div id="ignrLstSbmt">
+          <input id="addLstnTxtInptSbmt" type="submit" value="save" style="margin-left: 6px; width:60px;" />
+          </div>
+        </div>
+      </div>
 
     </div>
   
