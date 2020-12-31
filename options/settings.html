@@ -21,72 +21,55 @@
           <div>global settings:</div>
         </div> 
  
-        <div id="glblMsg" msgId="glblMsg"  class="toolTip" >
-        </div>
- 
         <div class="chckLst">
           <div class="fRow">
-            <div msgId="glblMsg" msgStyl="padding: 6px 8px 6px 8px; margin-top: 1px;" info="This is the *NUCLEAR* option. Pages these days have ways to try to load things even when other scripts says to do otherwise. This will *LITERALLY BREAK THE JAVASCRIPT IN THE PAGE BY CALLING A BROKEN JAVASCRIPT SYNTAX.* Use only when a) you want *ALL* javascript to not run b) you don't care if you break the entire page to do it." >break js: </div>
-            <input id="breakJs" name="breakJs" type="checkbox" /> 
+            <div mMsgId="glblMsg" msgClass="toolTipFull" info="This is the *NUCLEAR* option. Pages these days have ways to try to load things even when other scripts says to do otherwise. This will *LITERALLY BREAK THE JAVASCRIPT IN THE PAGE BY CALLING A BROKEN JAVASCRIPT SYNTAX.* Use only when a) you want *ALL* javascript to not run b) you don't care if you break the entire page to do it." >break js: </div>
+            <input id="breakJs" name="breakJs" type="checkbox" mMsgId="glblMsg" msgClass="toolTipFull" info="This is the *NUCLEAR* option. Pages these days have ways to try to load things even when other scripts says to do otherwise. This will *LITERALLY BREAK THE JAVASCRIPT IN THE PAGE BY CALLING A BROKEN JAVASCRIPT SYNTAX.* Use only when a) you want *ALL* javascript to not run b) you don't care if you break the entire page to do it." /> 
           </div>
     
           <div class="fRow">
-            <div msgId="glblMsg" msgId="glblMsg" msgStyl="padding: 6px 8px 6px 8px; margin-top: 1px;" info="This attempts to gracefully to tell javascript to end all scripts. It tells the page that an error was thrown so stop all execution. There may be ways to get around this, which is why the previous 'break js' options exits." >stop js: </div>
-            <input id="stopJs" type="checkbox" /> 
+            <div mMsgId="glblMsg" msgClass="toolTipFull" info="This attempts to gracefully to tell javascript to end all scripts. It tells the page that an error was thrown so stop all execution. There may be ways to get around this, which is why the previous 'break js' options exits." >stop js: </div>
+            <input id="stopJs" type="checkbox" mMsgId="glblMsg" msgClass="toolTipFull" info="This attempts to gracefully to tell javascript to end all scripts. It tells the page that an error was thrown so stop all execution. There may be ways to get around this, which is why the previous 'break js' options exits." /> 
           </div>
     
           <div class="fRow">
-            <div msgId="glblMsg" msgStyl="padding: 6px 8px 6px 8px; margin-top: 1px;" info="This overrides the existing ajax funtions with nothing functional. It'll send a console message that an attempt was made and where to and that's it." >prevent xhr/ajax: </div>
-            <input id="prvntXHR" type="checkbox" />
+            <div mMsgId="glblMsg" msgClass="toolTipFull" info="This overrides the existing ajax funtions with nothing functional. It'll send a console message that an attempt was made and where to and that's it." >prevent xhr/ajax: </div>
+            <input id="prvntXHR" type="checkbox" mMsgId="glblMsg" msgClass="toolTipFull" info="This overrides the existing ajax funtions with nothing functional. It'll send a console message that an attempt was made and where to and that's it."/>
           </div>
   
           <div class="fRow">
-            <div msgId="glblMsg" msgStyl="padding: 6px 8px 6px 8px; margin-top: 1px;" info="This overrides the addEventListener() funtion with nothing functional. It'll send a console message that an attempt was made and where to and that's it." >prevent event listeners: </div>
-            <input id="prvntEventLstnr" type="checkbox" />
+            <div mMsgId="glblMsg" msgClass="toolTipFull" info="This overrides the addEventListener() funtion with nothing functional. It'll send a console message that an attempt was made and where to and that's it." >prevent event listeners: </div>
+            <input id="prvntEventLstnr" type="checkbox" mMsgId="glblMsg" msgClass="toolTipFull" info="This overrides the addEventListener() funtion with nothing functional. It'll send a console message that an attempt was made and where to and that's it."/>
           </div>
         </div>
-        
+       
+        <div id="glblMsg" msgId="glblMsg"  class="toolTip" ></div>
+ 
         <div class="subHeader"> 
-          <div msgId="glblMsg" msgStyl="padding: 6px 8px 6px 8px; margin-top: 1px;" info="Add event type to disable listeners to that event. This makes it so that things like right-click (contextmenu) can't be disabled. This is like the 'prevent event listener', but doesn't kill all the event listeners " >stop event propagation: </div>
-        </div>
+          <div mMsgId="evntHdMsg" msgClass="toolTipHFull" info="Add event type to disable listeners to that event. This makes it so that things like right-click (contextmenu) can't be disabled. This is like the 'prevent event listener', but doesn't kill all the event listeners " >stop event propagation: </div><div id="evntHdMsg" class="toolTipH"></div>
 
-        <div class="addLstn">
-          <div>
-            <div>event: </div>
-            <select id="lstnEvents">
-            </select>
-          </div>
-
-          <div>
-            <input type="submit" value="add" />
-          </div>
         </div>
 
         <div class="addLstnTxt">
-          <input id="addLstnTxtInpt" type="text" placeholder="ex. click|contextmenu|scroll"/>
-          <input id="addLstnTxtInptSbmt" type="submit" value="save" style="margin-left: 6px; width:60px; " />
+          <div><input type="checkbox"></div>
+          <div style="flex-grow: 5;"><input id="addLstnTxtInpt" type="text" placeholder="ex. click|contextmenu|scroll" style="width: 100%;" mMsgId="evntMsg" msgClass="toolTipFull" info="abort, afterprint, animationend, animationiteration, animationstart, beforeprint, beforeunload, blur, canplay, canplaythrough, change, click, contextmenu, copy, cut, dblclick, drag, dragend, dragenter, dragleave, dragover, dragstart, drop, durationchange, ended, error, focus, focusin, focusout, fullscreenchange, fullscreenerror, hashchange, input, invalid, keydown, keypress, keyup, load, loadeddata, loadedmetadata, loadstart, message, mousedown, mouseenter, mouseleave, mousemove, mouseover, mouseout, mouseup, mousewheel, offline, online, open, pagehide, pageshow, paste, pause, play, playing, popstate, progress, ratechange, resize, reset, scroll, search, seeked, seeking, select, show, stalled, storage, submit, suspend, timeupdate, toggle, touchcancel, touchend, touchmove, touchstart, transitionend, unload, volumechange, waiting, wheel" /></div>
+          <div><input id="addLstnTxtInptSbmt" type="submit" value="save" style="margin-left: 6px; width:60px; " /></div>
         </div>
+
+        <div id="evntMsg" mMsgId="evntMsg"  class="toolTip"></div>
 
         <div class="subHeader"> 
-          <div msgId="glblMsg" msgStyl="padding: 6px 8px 6px 8px; margin-top: 1px;" info="This allows you to stop certain XHR/ajax calls for a resource of a specific type." >stop network call types: </div>
-        </div>
-
-        <div class="addLstn">
-          <div>
-            <div>type: </div>
-            <select id="xhrTypes">
-            </select>
-          </div>
-
-          <div>
-            <input type="submit" value="add" />
-          </div>
+          <div mMsgId="ntwrkHdMsg" msgClass="toolTipHFull" info="Add event type to disable listeners to that event. This makes it so that things like right-click (contextmenu) can't be disabled. This is like the 'prevent event listener', but doesn't kill all the event listeners " >stop network call types: </div><div id="ntwrkHdMsg" mMsgId="ntwrkHdMsg" class="toolTipH"></div>
         </div>
 
         <div class="addLstnTxt">
-          <input id="addLstnTxtInpt" type="text" placeholder="ex. xmlhttprequest|media|websocket"/>
-          <input id="addLstnTxtInptSbmt" type="submit" value="save" style="margin-left: 6px; width:60px;" />
+          <div><input type="checkbox"></div>
+          <div style="flex-grow: 5;"><input id="addLstnTxtInpt" type="text" placeholder="ex. xmlhttprequest|media|websocket" style="width: 100%;" mMsgId="ntwrkMsg" msgClass="toolTipFull" info="main_frame, sub_frame, stylesheet, script, image, font, object, xmlhttprequest, ping, csp_report, media, websocket, other"/></div>
+          <div><input id="addLstnTxtInptSbmt" type="submit" value="save" style="margin-left: 6px; width:60px; " /></div>
         </div>
+
+        <div id="ntwrkMsg" mMsgId="ntwrkMsg"  class="toolTip"></div>
+
       </div>
 
       <div class="olBox">
@@ -105,6 +88,48 @@ youtube.com"></textarea>
           </div>
         </div>
       </div>
+
+      <div class="olBox">
+        <div class="header">
+          <div msgId="applyLstMsg" msgStyl="padding: 6px 8px 6px 8px; margin-top: 1px;" info="domains to ignore.">apply list:</div>
+        </div>
+
+        <div id="applyLstMsg" msgId="applyLstMsg"  class="toolTip" >
+        </div>
+
+        <div class="chckLst">
+          <div class="fRow">
+            <div msgId="glblMsg" msgStyl="padding: 6px 8px 6px 8px; margin-top: 1px;" info="This is the *NUCLEAR* option. Pages these days have ways to try to load things even when other scripts says to do otherwise. This will *LITERALLY BREAK THE JAVASCRIPT IN THE PAGE BY CALLING A BROKEN JAVASCRIPT SYNTAX.* Use only when a) you want *ALL* javascript to not run b) you don't care if you break the entire page to do it." >break js: </div>
+            <input id="breakJs" name="breakJs" type="checkbox" />
+          </div>
+
+          <div class="fRow">
+            <div msgId="glblMsg" msgId="glblMsg" msgStyl="padding: 6px 8px 6px 8px; margin-top: 1px;" info="This attempts to gracefully to tell javascript to end all scripts. It tells the page that an error was thrown so stop all execution. There may be ways to get around this, which is why the previous 'break js' options exits." >stop js: </div>
+            <input id="stopJs" type="checkbox" />
+          </div>
+
+          <div class="fRow">
+            <div msgId="glblMsg" msgStyl="padding: 6px 8px 6px 8px; margin-top: 1px;" info="This overrides the existing ajax funtions with nothing functional. It'll send a console message that an attempt was made and where to and that's it." >prevent xhr/ajax: </div>
+            <input id="prvntXHR" type="checkbox" />
+          </div>
+
+          <div class="fRow">
+            <div msgId="glblMsg" msgStyl="padding: 6px 8px 6px 8px; margin-top: 1px;" info="This overrides the addEventListener() funtion with nothing functional. It'll send a console message that an attempt was made and where to and that's it." >prevent event listeners: </div>
+            <input id="prvntEventLstnr" type="checkbox" />
+          </div>
+          <div><input type="submit" value="add" /></div>
+        </div>
+
+        <div class="ignrLst">
+          <textarea id="applyLstTA" type="text" placeholder="ex. gmail.com
+youtube.com"></textarea>
+          <div id="ignrLstSbmt">
+          <input id="addLstnTxtInptSbmt" type="submit" value="save" style="margin-left: 6px; width:60px;" />
+          </div>
+        </div>
+      </div>
+
+
 
     </div>
   

@@ -17,18 +17,26 @@ color: #888888;
 
 div{
 display: flex;
-justify-content: space-around;
+justify-content: space-evenly;
 align-items: center;
 box-sizing: border-box;
 text-align: justify;
+transition: all;
 }
 
 textarea{
 box-sizing: border-box;
+border: 1px solid #888888;
+border-radius: 4px;
+background-color: #000000;
+width: 100%;
+color: #888888;
+padding: 4px;
 }
 
 .pageWrap{
 display: table;
+width: 100%;
 }
 
 #enable{
@@ -42,13 +50,47 @@ align-items: center;
 }
 
 .toolTip{
+position: absolute;
+z-index: 99;
 background-color: #FFD2D9;
 color: #FF3B5A;
 justify-content: center;
 align-items: center;
 font-size: small;
 opacity: 0.9;
+overflow: hidden;
+transition: all 0.5s ease-in-out;
+max-height: 0px;
+height: auto;
+max-width: 95vw;
+border-radius: 4px;
 }
+
+.toolTipFull{
+max-height: 100px;
+padding: 6px 8px 6px 8px;
+margin-top: 1px;
+max-height: 100px;
+overflow: auto;
+}
+
+.toolTipH{
+justify-content: center;
+align-items: center;
+font-size: small;
+overflow: hidden;
+transition: all 0.5s ease-in-out;
+max-width: 0px;
+width: auto;
+height: 100%;
+white-space: nowrap;
+margin-left: 8px;
+}
+
+.toolTipHFull{
+max-width: 100%;
+}
+
 
 
 .olBox{
@@ -97,10 +139,11 @@ margin-left: 6px;
 }
 
 .addLstn{
-justify-content: space-around;
+justify-content: flex-start;
 }
 
 .addLstn div{
+padding-left: 4px;
 }
 
 .addLstn input[type=submit]{
@@ -130,10 +173,10 @@ padding: 0px 6px 0px 6px;
 .addLstnTxt input{
 border: 1px solid #888888;
 border-radius: 4px;
-width: 100%;
 background-color: #000000;
 color: #888888;
 padding: 4px; 
+margin: 0px 4px 0px 4px;
 }
 
 .addLstnTxtSbmt{
@@ -147,11 +190,6 @@ padding: 6px 6px 0px 6px;
 }
 
 .ignrLst textarea{
-border: 1px solid #888888;
-border-radius: 4px;
-background-color: #000000;
-width: 100%;
-color: #888888;
 padding: 4px;
 min-height: 120px;
 }

@@ -140,6 +140,27 @@ function startListen(){
     }
   });
 
+  document.addEventListener("mouseover", (e) => {
+    switch(e.target.name){
+      default:
+         if(e.target.hasAttribute('mMsgId') && e.target.hasAttribute('info') ){
+          document.getElementById(e.target.getAttribute("mMsgId")).innerText=e.target.getAttribute("info");
+          document.getElementById(e.target.getAttribute("mMsgId")).classList.add(e.target.getAttribute("msgClass"));
+        }
+      break;
+    }
+  });
+
+  document.addEventListener("mouseout", (e) => {
+    switch(e.target.name){
+      default:
+         if(e.target.hasAttribute('mMsgId') && e.target.hasAttribute('info') ){
+          document.getElementById(e.target.getAttribute("mMsgId")).classList.remove(e.target.getAttribute("msgClass"));
+        }
+      break;
+    }
+  });
+
 }
 
 
@@ -193,6 +214,4 @@ chrome.storage.local.get(null,(item) => {
 
 //running main function
 
-genSelect("lstnEvents", eTypes);
-genSelect("xhrTypes", xhrTypes);
 startListen();
