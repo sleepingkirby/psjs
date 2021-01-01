@@ -59,19 +59,18 @@ align-items: center;
 font-size: small;
 opacity: 0.9;
 overflow: hidden;
-transition: all 0.5s ease-in-out;
+transition: max-height 0.5s ease-in-out, padding-top 0.5s ease-in-out, padding-bottom 0.5s ease-in-out;
 max-height: 0px;
 height: auto;
 max-width: 95vw;
 border-radius: 4px;
+padding: 0px 8px 0px 8px;
 }
 
 .toolTipFull{
-max-height: 100px;
+max-height: 200px;
 padding: 6px 8px 6px 8px;
 margin-top: 1px;
-max-height: 100px;
-overflow: auto;
 }
 
 .toolTipH{
@@ -107,12 +106,12 @@ margin-bottom: 6px;
 
 
 .header{
-justify-content: center;
-align-items: flex-start;
+justify-content: flex-start;
+align-items: center;
 padding: 4px 6px 4px 6px;
 background-color: #333333;
 border-radius: 8px 8px 0px 0px;
-flex-direction: column;
+flex-direction: row;
 }
 
 .header > div {
@@ -130,12 +129,22 @@ padding: 0px 10px 0px 10px;
 justify-content: flex-start;
 }
 
-.chckLst > .fRow{
+.fRow{
 margin-right: 10px;
 }
 
 .fRow > input[type="checkbox"]{
 margin-left: 6px;
+}
+
+.fRow > div:first-child{
+margin-right: 4px;
+}
+
+.fCol{
+flex-direction: column;
+justify-content: center;
+flex-align: center;
 }
 
 .addLstn{
