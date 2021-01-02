@@ -34,6 +34,10 @@ color: #888888;
 padding: 4px;
 }
 
+textarea::placeholder,input::placeholder{
+color: #444444;
+}
+
 .pageWrap{
 display: table;
 width: 100%;

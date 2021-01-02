@@ -41,7 +41,6 @@ return rtrn;
 
 
 function saveNotify( obj, str, appnd=false){
-console.log('butWhyMod: ' + str);
     if(appnd){
     obj.appendChild(document.createElement("br")); 
     obj.appendChild(document.createTextNode(str)); 
@@ -88,6 +87,53 @@ function clearMsg(el){
 }
 
 
+//gets hostname from url
+function hostFromURL(str){
+var rtrn=str;
+var proto=rtrn.match(/[a-z]+:\/\/+/g);
+var rtrn=rtrn.substr(proto[0].length,rtrn.length);
+var end=rtrn.search('/');
+var rtrn=rtrn.substr(0,end);
+return rtrn;
+}
+
+/*
+        chrome.tabs.query({active: true, currentWindow: true},(tabs) => {
+        var url=tabs[0].url;
+        var host=hostFromURL(url);
+          chrome.storage.local.get('custList',(custList) => {
+          var newCL=custList.custList;
+          newCL[host]=null;
+            var notif=document.getElementsByClassName('notify')[0];
+            notif.id=''; //resets the notification area animation
+            chrome.storage.local.set({custList: newCL},()=>{
+            console.log('butWhyMod: added host to custom List ' + host);
+            notif.textContent='\'' + host + '\' added to white list.';
+            notif.id='fadeOut';
+            notif.addEventListener("animationend", ()=>{
+            notif.id='';
+            });
+            })
+          });
+        });
+*/
+
+function compileOpts(){
+var dmn=document.getElementById('applyLstDmn').value;
+  if(!dmn || dmn==""){
+  return ['',''];
+  }
+var arr=['applyLstEnbld', 'applyLstBrkJs', 'applyLstStpJs', 'applyLstEvnt', 'applyLstXHR', 'applyLstEvntCst', 'applyLstNtwrk'];
+var kv={};
+var str=dmn;
+var v="";
+  for(let idStr of arr){
+    var tmpEl=document.getElementById(idStr);
+    v=tmpEl.type=="checkbox"?tmpEl.checked:tmpEl.value;
+    str+=","+v;
+  }
+return [dmn,str];
+}
 
 //main function
 function startListen(){
@@ -96,18 +142,35 @@ function startListen(){
       case 'save':
         //save self
         if( !e.target.hasAttribute("actFor") || e.target.getAttribute("actFor")=="self"){
+        var obj={};
+        obj[e.target.name]=e.target.type=="checkbox"?e.target.checked:e.target.value;
+          chrome.storage.local.set(obj, function(){
+            chrome.storage.local.get(null, function(e){
+            console.log(e);
+            });
+          }); 
         break;
         }
     
         //save for element
         var tmpEl=document.getElementById(e.target.getAttribute("actFor"));
+        var value=tmpEl.type=="checkbox"?tmpEl.checked:tmpEl.value;
         if(tmpEl.hasAttribute("name")){
-          
+        var obj={};
+        obj[tmpEl.name]=value;
+          chrome.storage.local.set(obj, function(e){
+            chrome.storage.local.get(null, function(e){
+            console.log(e);
+            });
+          });
         }
-          
-             
- 
-      console.log(e.target.getAttribute("actFor"));
+      break;
+      case 'convAndAdd':
+        var arr=compileOpts();
+        var el=document.getElementById("applyLstTA");
+        if(arr[0]!="" && !el.textContent.includes(arr[0])){
+        el.textContent=el.textContent+arr[1]+"\n";
+        }
       break;
       case 'savePref':
       //grab settings, parse and enter into storage.local
