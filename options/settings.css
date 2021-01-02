@@ -127,14 +127,16 @@ background-color: #333333;
 .chckLst{
 padding: 0px 10px 0px 10px;
 justify-content: flex-start;
+flex-wrap: wrap;
 }
 
 .fRow{
 margin-right: 10px;
+margin-bottom: 4px;
 }
 
 .fRow > input[type="checkbox"]{
-margin-left: 6px;
+margin-left: 4px;
 }
 
 .fRow > div:first-child{

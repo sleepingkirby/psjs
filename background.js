@@ -28,14 +28,17 @@ types:
 "main_frame", "sub_frame", "stylesheet", "script", "image", "font", "object", "xmlhttprequest", "ping", "csp_report", "media", "websocket", or "other" 
 */
 
-      chrome.webRequest.onBeforeRequest.addListener(
-        function(details) {
-        //console.log("============>>");
-        //console.log(details);
-        //return {cancel: true}; //returning {cancel: true} will prevent/stop the network call
-        },
-        {urls: ["<all_urls>"]},['blocking']);
 
+chrome.webRequest.onBeforeRequest.addListener(
+  function(details){
+    chrome.storage.local.get(['test'], function(r) {
+    });
+  
+  //console.log("============>>");
+  //console.log(details);
+  //return {cancel: true}; //returning {cancel: true} will prevent/stop the network call
+  },
+{urls: ["<all_urls>"]},['blocking']);
 
 
 chrome.runtime.onInstalled.addListener(function() {

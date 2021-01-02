@@ -1,10 +1,4 @@
 
-var eTypes=["abort", "afterprint", "animationend", "animationiteration", "animationstart", "beforeprint", "beforeunload", "blur", "canplay", "canplaythrough", "change", "click", "contextmenu", "copy", "cut", "dblclick", "drag", "dragend", "dragenter", "dragleave", "dragover", "dragstart", "drop", "durationchange", "ended", "error", "focus", "focusin", "focusout", "fullscreenchange", "fullscreenerror", "hashchange", "input", "invalid", "keydown", "keypress", "keyup", "load", "loadeddata", "loadedmetadata", "loadstart", "message", "mousedown", "mouseenter", "mouseleave", "mousemove", "mouseover", "mouseout", "mouseup", "mousewheel", "offline", "online", "open", "pagehide", "pageshow", "paste", "pause", "play", "playing", "popstate", "progress", "ratechange", "resize", "reset", "scroll", "search", "seeked", "seeking", "select", "show", "stalled", "storage", "submit", "suspend", "timeupdate", "toggle", "touchcancel", "touchend", "touchmove", "touchstart", "transitionend", "unload", "volumechange", "waiting", "wheel"];
-
-var xhrTypes=["main_frame", "sub_frame", "stylesheet", "script", "image", "font", "object", "xmlhttprequest", "ping", "csp_report", "media", "websocket", "other"];
-
-
-
 function addNewRow( className ){
 var tbl=document.getElementsByClassName(className);
 var newIn="";
@@ -98,7 +92,23 @@ function clearMsg(el){
 //main function
 function startListen(){
   document.addEventListener("click", (e) => {
-    switch(e.target.name){
+    switch(e.target.getAttribute("act")){
+      case 'save':
+        //save self
+        if( !e.target.hasAttribute("actFor") || e.target.getAttribute("actFor")=="self"){
+        break;
+        }
+    
+        //save for element
+        var tmpEl=document.getElementById(e.target.getAttribute("actFor"));
+        if(tmpEl.hasAttribute("name")){
+          
+        }
+          
+             
+ 
+      console.log(e.target.getAttribute("actFor"));
+      break;
       case 'savePref':
       //grab settings, parse and enter into storage.local
       var custList=document.getElementsByClassName('custListTxt')[0].value;
@@ -127,15 +137,12 @@ function startListen(){
         notif.id='';
         });
       break;
+      case 'addLstnTxtInptSbmt':
+      //var tmpEl=document.getElementById("addLstnTxtInpt");
+      //console.log(tmpEl);
+      //console.log(e.target);
+      break;
       default:
-        if( e.target.hasAttribute('msgId') && e.target.id == e.target.getAttribute('msgId')){
-          document.getElementById(e.target.getAttribute("msgId")).innerText="";
-          document.getElementById(e.target.getAttribute("msgId")).style="";
-        }
-        else if(e.target.hasAttribute('msgId') && e.target.hasAttribute('info') ){
-          document.getElementById(e.target.getAttribute("msgId")).innerText=e.target.getAttribute("info");
-          document.getElementById(e.target.getAttribute("msgId")).style=e.target.getAttribute("msgStyl");
-        }
       break;
     }
   });

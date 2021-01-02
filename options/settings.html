@@ -12,7 +12,7 @@
       <div id="enable" name="enable">
         <div style="border: 1px solid #eeeeee; border-radius: 8px; padding: 6px 10px 6px 10px;">
           <div><label id="enableTitle" for="inptAddOnEn">Add-on enabled:</label> </div>
-          <div style="border: none;"><input id="inptAddOnEn" class="addOnEn" type="checkbox" name='inptAddOnEn' /></div>
+          <div style="border: none;"><input id="inptAddOnEn" class="addOnEn" type="checkbox" name='inptAddOnEn' action="save" /></div>
         </div>
       </div>
 
@@ -31,17 +31,17 @@
     
           <div class="fRow">
             <div mMsgId="glblMsg" msgClass="toolTipFull" info="This attempts to gracefully to tell javascript to end all scripts. It tells the page that an error was thrown so stop all execution. There may be ways to get around this, which is why the previous 'break js' options exits." >stop js: </div>
-            <input id="stopJs" type="checkbox" mMsgId="glblMsg" msgClass="toolTipFull" info="This attempts to gracefully to tell javascript to end all scripts. It tells the page that an error was thrown so stop all execution. There may be ways to get around this, which is why the previous 'break js' options exits." /> 
+            <input id="stopJs" type="checkbox" name="stopJs" mMsgId="glblMsg" msgClass="toolTipFull" info="This attempts to gracefully to tell javascript to end all scripts. It tells the page that an error was thrown so stop all execution. There may be ways to get around this, which is why the previous 'break js' options exits." /> 
           </div>
     
           <div class="fRow">
-            <div mMsgId="glblMsg" msgClass="toolTipFull" info="This overrides the existing ajax funtions with nothing functional. It'll send a console message that an attempt was made and where to and that's it." >prevent xhr/ajax: </div>
-            <input id="prvntXHR" type="checkbox" mMsgId="glblMsg" msgClass="toolTipFull" info="This overrides the existing ajax funtions with nothing functional. It'll send a console message that an attempt was made and where to and that's it."/>
-          </div>
-  
-          <div class="fRow">
             <div mMsgId="glblMsg" msgClass="toolTipFull" info="This overrides the addEventListener() funtion with nothing functional. It'll send a console message that an attempt was made and where to and that's it." >prevent event listeners: </div>
             <input id="prvntEventLstnr" type="checkbox" mMsgId="glblMsg" msgClass="toolTipFull" info="This overrides the addEventListener() funtion with nothing functional. It'll send a console message that an attempt was made and where to and that's it."/>
+          </div>
+
+          <div class="fRow">
+            <div mMsgId="glblMsg" msgClass="toolTipFull" info="This overrides the existing ajax funtions with nothing functional. It'll send a console message that an attempt was made and where to and that's it." >prevent xhr/ajax: </div>
+            <input id="prvntXHR" type="checkbox" mMsgId="glblMsg" msgClass="toolTipFull" info="This overrides the existing ajax funtions with nothing functional. It'll send a console message that an attempt was made and where to and that's it."/>
           </div>
         </div>
        
@@ -67,9 +67,9 @@
         <div id="ntwrkHdMsg" mMsgId="ntwrkHdMsg" class="toolTip"></div>
 
         <div class="addLstnTxt">
-          <div><input type="checkbox" mMsgId="ntwrkMsg" msgClass="toolTipFull" info="enable network call prevention" ></div>
-          <div style="flex-grow: 5;"><input id="addLstnTxtInpt" type="text" placeholder="ex. xmlhttprequest|media|websocket" style="width: 100%;" mMsgId="ntwrkMsg" msgClass="toolTipFull" info="main_frame, sub_frame, stylesheet, script, image, font, object, xmlhttprequest, ping, csp_report, media, websocket, other"/></div>
-          <div><input id="addLstnTxtInptSbmt" type="submit" value="save" style="margin-left: 6px; width:60px; " /></div>
+          <div><input id="xhrLstEnbl" name="xhrLstEnbl" type="checkbox" mMsgId="ntwrkMsg" msgClass="toolTipFull" info="enable network call prevention" action="save" actionFor="self"></div>
+          <div style="flex-grow: 5;"><input id="addNtwrkTxtInpt" name="xhrLst" type="text" placeholder="ex. xmlhttprequest|media|websocket" style="width: 100%;" mMsgId="ntwrkMsg" msgClass="toolTipFull" info="main_frame, sub_frame, stylesheet, script, image, font, object, xmlhttprequest, ping, csp_report, media, websocket, other"/></div>
+          <div><input id="addNtwrkTxtInptSbmt" name="addNtwekTxtInptSbmt" type="submit" value="save" act="save" actFor="addNtwrkTxtInpt" style="margin-left: 6px; width:60px;" /></div>
         </div>
 
         <div id="ntwrkMsg" mMsgId="ntwrkMsg"  class="toolTip"></div>
@@ -121,24 +121,23 @@ youtube.com"></textarea>
           </div>
 
           <div class="fRow">
+            <div id="applyLstEvntLbl" mMsgId="applyLstMsg" msgClass="toolTipFull" info="stop event listener option. Refer to global's &quot;prevent event listeners&quot; for full info" >events: </div>
+            <input id="applyLstEvnt" type="checkbox" mMsgId="applyLstMsg" msgClass="toolTipFull" info="stop event listener option. Refer to global's &quot;prevent event listeners&quot; for full info"/>
+          </div>
+
+          <div class="fRow">
             <div id="applyLstXHRLbl" mMsgId="applyLstMsg" msgClass="toolTipFull" info="stop XHR/AJAX option. Refer to global's &quot;XHR/Ajax&quot; for full info" >xhr/ajax: </div>
             <input id="applyLstXHR" type="checkbox" mMsgId="applyLstMsg" msgClass="toolTipFull" info="stop XHR/AJAX option. Refer to global's &quot;prevent xhr/ajax&quot; for full info"/>
           </div>
 
-          <div class="fRow">
-            <div id="applyLstEvntLbl" mMsgId="applyLstMsg" msgClass="toolTipFull" info="stop event listener option. Refer to global's &quot;prevent event listeners&quot; for full info" >events: </div>
-            <input id="applyLstEvnt" type="checkbox" mMsgId="applyLstMsg" msgClass="toolTipFull" info="stop event listener option. Refer to global's &quot;prevent event listeners&quot; for full info"/>
-          </div>
-        </div>
 
-        <div class="chckLst">
           <div class="fRow">
-            <div id="applyLstEvntLbl" mMsgId="applyLstMsg" msgClass="toolTipFull" info="Custom event listeners">event propagation:</div>
+            <div id="applyLstEvntLbl" mMsgId="applyLstMsg" msgClass="toolTipFull" info="Custom event listeners">event prop.:</div>
             <div><input id="applyLstEvnt" type="text" placeholder="ex. click|contextmenu|scroll" style="width: 100%;" mMsgId="applyLstMsg" msgClass="toolTipFull" info="abort, afterprint, animationend, animationiteration, animationstart, beforeprint, beforeunload, blur, canplay, canplaythrough, change, click, contextmenu, copy, cut, dblclick, drag, dragend, dragenter, dragleave, dragover, dragstart, drop, durationchange, ended, error, focus, focusin, focusout, fullscreenchange, fullscreenerror, hashchange, input, invalid, keydown, keypress, keyup, load, loadeddata, loadedmetadata, loadstart, message, mousedown, mouseenter, mouseleave, mousemove, mouseover, mouseout, mouseup, mousewheel, offline, online, open, pagehide, pageshow, paste, pause, play, playing, popstate, progress, ratechange, resize, reset, scroll, search, seeked, seeking, select, show, stalled, storage, submit, suspend, timeupdate, toggle, touchcancel, touchend, touchmove, touchstart, transitionend, unload, volumechange, waiting, wheel" /></div>
           </div>
           <div class="fRow">
             <div id="applyLstNtwrkLbl" mMsgId="applyLstMsg" msgClass="toolTipFull" info="Custom network calls">network call:</div>
-            <div><input id="applyLstNtwrk" type="text" placeholder="ex. click|contextmenu|scroll" style="width: 100%;" mMsgId="applyLstMsg" msgClass="toolTipFull" info="main_frame, sub_frame, stylesheet, script, image, font, object, xmlhttprequest, ping, csp_report, media, websocket, other" /></div>
+            <div><input id="applyLstNtwrk" type="text" placeholder="ex. xmlhttprequest|media|websocket" style="width: 100%;" mMsgId="applyLstMsg" msgClass="toolTipFull" info="main_frame, sub_frame, stylesheet, script, image, font, object, xmlhttprequest, ping, csp_report, media, websocket, other" /></div>
           </div>
         </div>
 
