@@ -55,7 +55,7 @@
 
         <div class="addLstnTxt">
           <div><input type="checkbox" name="evntLstBool" act="save" mMsgId="evntMsg" msgClass="toolTipFull" info="enable event propagation prevention"  ></div>
-          <div style="flex-grow: 5;"><input id="addLstnTxtInpt" name="evntList" type="text" placeholder="ex. click|contextmenu|scroll" style="width: 100%;" mMsgId="evntMsg" msgClass="toolTipFull" info="abort, afterprint, animationend, animationiteration, animationstart, beforeprint, beforeunload, blur, canplay, canplaythrough, change, click, contextmenu, copy, cut, dblclick, drag, dragend, dragenter, dragleave, dragover, dragstart, drop, durationchange, ended, error, focus, focusin, focusout, fullscreenchange, fullscreenerror, hashchange, input, invalid, keydown, keypress, keyup, load, loadeddata, loadedmetadata, loadstart, message, mousedown, mouseenter, mouseleave, mousemove, mouseover, mouseout, mouseup, mousewheel, offline, online, open, pagehide, pageshow, paste, pause, play, playing, popstate, progress, ratechange, resize, reset, scroll, search, seeked, seeking, select, show, stalled, storage, submit, suspend, timeupdate, toggle, touchcancel, touchend, touchmove, touchstart, transitionend, unload, volumechange, waiting, wheel" /></div>
+          <div style="flex-grow: 5;"><input id="addLstnTxtInpt" name="evntLst" type="text" placeholder="ex. click|contextmenu|scroll" style="width: 100%;" mMsgId="evntMsg" msgClass="toolTipFull" info="abort, afterprint, animationend, animationiteration, animationstart, beforeprint, beforeunload, blur, canplay, canplaythrough, change, click, contextmenu, copy, cut, dblclick, drag, dragend, dragenter, dragleave, dragover, dragstart, drop, durationchange, ended, error, focus, focusin, focusout, fullscreenchange, fullscreenerror, hashchange, input, invalid, keydown, keypress, keyup, load, loadeddata, loadedmetadata, loadstart, message, mousedown, mouseenter, mouseleave, mousemove, mouseover, mouseout, mouseup, mousewheel, offline, online, open, pagehide, pageshow, paste, pause, play, playing, popstate, progress, ratechange, resize, reset, scroll, search, seeked, seeking, select, show, stalled, storage, submit, suspend, timeupdate, toggle, touchcancel, touchend, touchmove, touchstart, transitionend, unload, volumechange, waiting, wheel" /></div>
           <div><input id="addLstnTxtInptSbmt" type="submit" value="save" act="save" actFor="addLstnTxtInpt" style="margin-left: 6px; width:60px;" /></div>
         </div>
 
@@ -102,7 +102,7 @@ youtube.com"></textarea>
 
         <div class="chckLst">
           <div class="fRow">
-            <input id="applyLstEnbld" name="applyLstEnbld" type="checkbox" mMsgId="applyLstMsg" msgClass="toolTipFull" info="enter entry as enabled" />
+            <input id="applyLstEnbld" name="applyLstEnbld" type="checkbox" mMsgId="applyLstMsg" msgClass="toolTipFull" info="enter entry as enabled" checked />
           </div>
 
           <div class="fRow">
@@ -138,6 +138,12 @@ youtube.com"></textarea>
           <div class="fRow">
             <div id="applyLstNtwrkLbl" mMsgId="applyLstMsg" msgClass="toolTipFull" info="Custom network calls">network call:</div>
             <div><input id="applyLstNtwrk" type="text" placeholder="ex. xmlhttprequest|media|websocket" style="width: 100%;" mMsgId="applyLstMsg" msgClass="toolTipFull" info="main_frame, sub_frame, stylesheet, script, image, font, object, xmlhttprequest, ping, csp_report, media, websocket, other" /></div>
+          </div>
+          <div class="fRow">
+            <input id="pullGlblStt" mMsgId="applyLstMsg" msgClass="toolTipFull" info="pulls the current global settings to here" act="pllApply" type="submit" value="pull" />
+          </div>
+          <div class="fRow">
+            <input id="clrStt" mMsgId="applyLstMsg" msgClass="toolTipFull" info="clears the settings to default" act="clrApply" type="submit" value="clear" />
           </div>
         </div>
 
