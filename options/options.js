@@ -14,9 +14,11 @@ function clearMsg(el){
 function hostFromURL(str){
 var rtrn=str;
 var proto=rtrn.match(/[a-z]+:\/\/+/g);
-var rtrn=rtrn.substr(proto[0].length,rtrn.length);
+rtrn=rtrn.substr(proto[0].length,rtrn.length);
 var end=rtrn.search('/');
-var rtrn=rtrn.substr(0,end);
+  if(end<0){
+  rtrn=rtrn.substr(0,end);
+  }
 return rtrn;
 }
 
@@ -85,11 +87,23 @@ function startListen(){
         }
       break;
       case 'convAndAdd':
-        var arr=compileOpts();
-        var el=document.getElementById("applyLstTA");
-        if(arr[0]!="" && !el.textContent.includes(arr[0])){
-        el.textContent=el.textContent+arr[1]+"\n";
+      var arr=compileOpts();
+      var el=document.getElementById("applyLstTA");
+      var str=el.value;
+     
+        if(el.value.includes(arr[0])){
+          document.getElementById("applyLstSvMsg").innerText="[x] Domain already exists in list.";
+          document.getElementById("applyLstSvMsg").classList.add("toolTipFull");
+        break;
         }
+ 
+        if(arr[0]!=""){
+        console.log("added");
+        el.value=str+arr[1]+"\n";
+        }
+      break;
+      case 'rmClass':
+      e.target.classList.remove(e.target.getAttribute("actFor"));
       break;
       case 'clrApply':
       clearApplySetting();

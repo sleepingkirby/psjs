@@ -77,6 +77,18 @@ padding: 6px 8px 6px 8px;
 margin-top: 1px;
 }
 
+.toolTipFullA{
+animation-name: toolTipFullAKF;
+animation-duration: 5s;
+}
+
+@keyframes toolTipFullAKF{
+0% {max-height: 200px;padding: 6px 8px 6px 8px;margin-top: 1px;}
+98% {max-height: 200px;}
+99% {max-height: 0px;}
+100%{padding: 0px 8px 0px 8px; margin-top: 0px;}
+} 
+
 .toolTipH{
 justify-content: center;
 align-items: center;
