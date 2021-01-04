@@ -10,10 +10,12 @@ function hostFromURL(str){
 var rtrn=str;
 var proto=rtrn.match(/[a-z]+:\/\/+/g);
 rtrn=rtrn.substr(proto[0].length,rtrn.length);
+
 var end=rtrn.search('/');
-  if(end<0){
+  if(end>=0){
   rtrn=rtrn.substr(0,end);
   }
+
 return rtrn;
 }
 
@@ -60,7 +62,7 @@ function parseApplyList(str){
   }
 
 console.log("PSJS: Parsing and caching custom apply list...");
-var arr=str.split("\n");
+var arr=str.trim().split("\n");
 var tmpl=['applyLstDmn','applyLstEnbld', 'applyLstBrkJs', 'applyLstStpJs', 'applyLstEvnt', 'applyLstXHR', 'applyLstEvntCst', 'applyLstNtwrk'];
  
   for(let ln of arr){
@@ -176,6 +178,7 @@ chrome.webRequest.onBeforeRequest.addListener(
   function(details){
     //if turned off, do NOTHING
     if(!conf.on){
+    console.log("PSJS: Extension turned off. Nothing to be done."); 
     return {};
     }
     
@@ -192,13 +195,18 @@ chrome.webRequest.onBeforeRequest.addListener(
     console.log("PSJS: Global settings ignored due to domain being in the \"Ignore List\": "+host);
     }
     
-
-    if(applyLst.length<=0){
+    //if applyLst is empty, block nothing.
+    if(Object.keys(applyLst).length<=0){
     return {};
     }
 
-  //console.log(details);
-  //return {cancel: true}; //returning {cancel: true} will prevent/stop the network call
+    if(applyLst.hasOwnProperty(host) && applyLst.applyLstEnbld){
+      if(applyLst[host].applyLstNtwrk.hasOwnProperty(details.type)){
+      console.log("PSJS: network call of host \""+host+"\" with type \""+details.type+"\" blocked due to \"apply List rules\": "+details.url);
+      return {cancel: true}; //return {cancel: true}; //returning {cancel: true} will prevent/stop the network call
+      }
+    }
+    
   },
 {urls: ["<all_urls>"]},['blocking']);
 
