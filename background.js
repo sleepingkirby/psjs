@@ -1,101 +1,3 @@
-types:'use strict';
-
-var applyLst={};
-var ignrLst={};
-var xhrLst={};
-var conf={};
-
-//gets hostname from url
-function hostFromURL(str){
-var rtrn=str;
-var proto=rtrn.match(/[a-z]+:\/\/+/g);
-rtrn=rtrn.substr(proto[0].length,rtrn.length);
-
-var end=rtrn.search('/');
-  if(end>=0){
-  rtrn=rtrn.substr(0,end);
-  }
-
-return rtrn;
-}
-
-
-//parses pipe list 
-function parsePipeList(str){
-  if(!str || str==""){
-  return {};
-  }
-
-var tmpLst= str.split("|");
-var rtrn={};
-  for(let v of tmpLst){
-    rtrn[v]=1;
-  }
-return rtrn;
-}
-
-function parseXHRList(str){
-console.log("PSJS: caching Network List");
-xhrLst=parsePipeList(str);
-return 0;
-}
-
-
-//puts ignore list into hash for easy search
-function parseIgnoreList(str){
-  if(!str || str==""){
-  ignrLst={};
-  return 1;
-  }
-console.log("PSJS: caching Ignore List");
-var tmpLst=str.split("\n");
-  for(let v of tmpLst){
-    ignrLst[v]=1;
-  }
-return 0;
-}
-
-//parses the string for applyLst in chrome.storage.local into a hash that's easily searchable
-function parseApplyList(str){
-  if(!str || str==""){
-  return 1;
-  }
-
-console.log("PSJS: Parsing and caching custom apply list...");
-var arr=str.trim().split("\n");
-var tmpl=['applyLstDmn','applyLstEnbld', 'applyLstBrkJs', 'applyLstStpJs', 'applyLstEvnt', 'applyLstXHR', 'applyLstEvntCst', 'applyLstNtwrk'];
- 
-  for(let ln of arr){
-  var set=ln.split(",");
-  var m=set.length;
-  applyLst[set[0]]={};
-  applyLst[set[0]][tmpl[1]]=set[1];
-  applyLst[set[0]][tmpl[2]]=set[2];
-  applyLst[set[0]][tmpl[3]]=set[3];
-  applyLst[set[0]][tmpl[4]]=set[4];
-  applyLst[set[0]][tmpl[5]]=set[5];
-  applyLst[set[0]][tmpl[6]]={};
-  applyLst[set[0]][tmpl[7]]={};
-
-    if(set.length>=7){
-    var evnt=set[6].split("|");
-    var em=evnt.length;
-      for(let ei=0; ei<em; ei++){
-      applyLst[set[0]][tmpl[6]][evnt[ei]]=1;   
-      }
-    }
-
-    if(set.length>=8){
-    var ntwrk=set[7].split("|");
-    var nm=ntwrk.length;
-      for(let ni=0; ni<nm; ni++){
-      applyLst[set[0]][tmpl[7]][ntwrk[ni]]=1;   
-      }
-    }
-  }
-return 0;
-}
-
 
 //============================== main code ran ====================================
 
@@ -125,7 +27,7 @@ chrome.storage.local.get(null, (d) => {
   else{
   //doing this twice as there's no telling that the previouvs set will happen before this runs
   parseApplyList(d.applyLst);//caching applyLst into easily findable hash
-  parseIgnoreList(d.ingrLst);//caching applyLst into easily findable hash
+  parseIgnoreList(d.ignrLst);//caching applyLst into easily findable hash
   parseXHRList(d.xhrLst);//caching applyLst into easily findable hash
   conf=d;
   }

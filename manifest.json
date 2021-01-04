@@ -25,13 +25,14 @@
   },
   "options_page": "options/settings.html",
   "background": {
-    "scripts": ["./background.js"],
+    "scripts": ["./common.js","./background.js"],
     "persistent": true
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["./content_scripts/psjs.js"]
+      "js": ["./common.js","./content_scripts/psjs.js"],
+      "run_at": "document_start"
     }
   ]
 }

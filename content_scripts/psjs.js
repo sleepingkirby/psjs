@@ -47,22 +47,6 @@
   function runOnMsg(request, sender, sendResponse){
     switch(request.action){
       case 'pullPatt':
-        chrome.storage.local.get(null, (item) => {
-        console.log('mewate: pull results with pattern '+item.patt);
-        var lns=grepHTML(item.patt);
-          if(lns && lns!=''){
-          lns=item.list+lns;
-            chrome.storage.local.set({list:lns},() => { 
-            console.log('mewate: results found.');
-            chrome.runtime.sendMessage({bdgNm: lns.trim().split(/\r\n|\r|\n/).length.toString()});
-            sendResponse({'list':lns});
-            });
-          }
-          else{
-          console.log('mewate: no results found.');  
-          }
-        });
-        sendResponse({'pullPatt':'done'});
       break;
       default:
       break;
@@ -146,7 +130,92 @@
     });
 */
 
-console.log("starting psjs");
+/*------------------------------------------------ 
+pre: none
+post: breaks javascript
+No, really, this functions just runs broken 
+javascript code. This is the *nuclear* option for
+pages that are really smart about running their 
+javascript code.
+------------------------------------------------*/
+function breakJs(){
+console.log("PSJS: Breaking javascript as requested...");
+rasdfasdfasdfasdfasdfasdfasdfeqwer();
+}
+
+/*------------------------------------------------ 
+pre: none
+post: throws error
+attempts to stop all JS by throwing an error. 
+Should do the trick most of the time. If it doesn't...
+that's what breakJs() is for.
+param: str to append to message.
+------------------------------------------------*/
+function stopJs(str){
+var msg="";
+  if( str && (typeof str === 'string' || str instanceof String) && str!=""){
+  msg=str;
+  }
+console.log("PSJS: Gracefully stopping all JS as requested. "+msg);
+throw new Error("PSJS: Gracefully stopping all JS. "+msg);
+}
+
+/*------------------------------------------------ 
+pre: none
+post: assigns null function to addEventListener
+assigns null function addEventListener function
+to prevent any new eventlisteners from being added
+------------------------------------------------*/
+function preventEventListener(){
+//window.addEventListener('contextmenu',function(e){e.stopPropagation();}, true);
+//window.addEventListener=funcion(){}; assigns a null function to event listener, stopping it to assign any new eventListener 
+console.log("PSJS: Assigning null function to window.addEventListener to prevent any new event listener from being added");
+window.addEventListener=function(){};
+}
+
+
+var conf={};
+
+chrome.storage.local.get(null, function(d){
+console.log("PSJS: Starting...");
+
+  if(!d.on){
+  console.log("PSJS: Extension is turned off... Doing nothing.");
+  return 0;
+  }
+
+  //setting up conf and hash
+  parseApplyList(d.applyLst);//caching applyLst into easily findable hash
+  parseIgnoreList(d.ignrLst);//caching applyLst into easily findable hash
+  parseXHRList(d.xhrLst);//caching applyLst into easily findable hash
+  var host=window.location.host;
+
+  //global setting application
+  if(!ignrLst.hasOwnProperty(host)){
+    //breaking javascript
+    if(d.breakJs){
+    breakJs();
+    }
+
+    // stopping javascript
+    if(d.stopJs){
+    stopJs();
+    }
+
+    if(d.prvntEvnt){
+    preventEventListener();
+    }
+  }
+  else{
+  console.log("PSJS: Host name on ignore list: "+host);
+  }
+
+  
+
+});
+
+
+
 
 
 //gracefully stop all javascript
@@ -164,7 +233,8 @@ XMLHttpRequest.prototype.send = function(value) {
     this.realSend(value);
 };
 
-  chrome.runtime.onMessage.addListener(runOnMsg);
+
+chrome.runtime.onMessage.addListener(runOnMsg);
 })();
 
 
