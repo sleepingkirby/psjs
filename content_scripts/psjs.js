@@ -169,8 +169,24 @@ to prevent any new eventlisteners from being added
 function preventEventListener(){
 //window.addEventListener('contextmenu',function(e){e.stopPropagation();}, true);
 //window.addEventListener=funcion(){}; assigns a null function to event listener, stopping it to assign any new eventListener 
-console.log("PSJS: Assigning null function to window.addEventListener to prevent any new event listener from being added");
-window.addEventListener=function(){};
+
+console.log("PSJS: Injecting code to prevent all attempts to add an event listener.");
+  EventTarget.prototype.addEventListener=function(type,listener){
+  console.log("PSJS: An attempt to add event listener of type: \""+type+"\", with listener: \""+listener+"\"");
+  }
+
+
+var injectedCode = '(' + function() {
+  EventTarget.prototype.addEventListener=function(type,listener){
+  console.log("PSJS: An attempt to add event listener of type: \""+type+"\", with listener: \""+listener+"\"");
+  }
+} + ')();';
+
+var script = document.createElement('script');
+script.textContent = injectedCode;
+(document.head || document.documentElement).appendChild(script);
+script.parentNode.removeChild(script);
+
 }
 
 

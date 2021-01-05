@@ -32,6 +32,7 @@
     {
       "matches": ["<all_urls>"],
       "js": ["./common.js","./content_scripts/psjs.js"],
+      "all_frames": true,
       "run_at": "document_start"
     }
   ]
