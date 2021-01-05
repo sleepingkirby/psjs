@@ -1,5 +1,3 @@
-
-
 //loading external files and settings.
 (function() {
   /**
@@ -53,82 +51,6 @@
     }
   }
 
-  /*--------------------
-  pre: everything. patt is a string of pattern
-  post: modifies the setting
-  greps the entire html of the page and returns what it finds to the settings
-  ---------------------*/
-  function grepHTML(patt){
-    if(!patt){
-    return false;
-    }
-
-    var html=document.documentElement.innerHTML;
-    var regexPatt = new RegExp(patt, "ig");
-    var strings=html.match(regexPatt);
-    //console.log("mewate: pattern fount matches");
-    //console.log(strings);
-      if( strings==null ||  !strings || strings.length<=0){
-      return false;
-      }
-    var lns='';
-      for(let ln of strings){
-      lns=lns+ln+'\n';
-      }
-  
-  return lns;
-  }
-
-  function autoPull(item){
-    if(item.hasOwnProperty('autoChck') && item.autoChck){
-    console.log('mewate: auto pulling results with pattern '+item.patt);
-    var lns=grepHTML(item.patt);
-      if(lns && lns!=''){
-      lns=item.list+lns;
-        chrome.storage.local.set({list:lns},() => { 
-        console.log('mewate: auto pull found results');
-        chrome.runtime.sendMessage({bdgNm: lns.trim().split(/\r\n|\r|\n/).length.toString()});
-        });
-      }
-      else{
-      console.log('mewate: auto pull found no results');  
-      }
-    } 
-  }
-
-
-/*
-    //auto pull 
-    chrome.storage.local.get( null ,(item) => {
-      if(item.hasOwnProperty('autoPgChck') && item.autoPgChck){
-        if(item.hasOwnProperty('autoCChck') && item.autoCChck){
-          item.list='';
-          chrome.storage.local.set({'list':""} ,() => {
-          console.log("mewate: auto purging list");
-          chrome.runtime.sendMessage({bdgNm: ""});
-          autoPull(item);
-          });
-        }  
-        else{
-        autoPull(item);
-        }
-      }
-
-       a lot of pages these days change URL but not a change page.
-        I haven't decided if "auto clear" means "clear on find" or "clear
-        on new page" yet. Until then, this "clear on new page" is commented
-        out 
-      else{
-        if(item.hasOwnProperty('autoCChck') && item.autoCChck){
-          chrome.storage.local.set({'list':""} ,() => {
-          console.log("mewate: auto purging list");
-          chrome.runtime.sendMessage({bdgNm: ""});
-          });
-        }
-      }
-      
-    });
-*/
 
 /*------------------------------------------------ 
 pre: none
@@ -140,7 +62,14 @@ javascript code.
 ------------------------------------------------*/
 function breakJs(){
 console.log("PSJS: Breaking javascript as requested...");
+
+var injectedCode = '(' + function() {
 rasdfasdfasdfasdfasdfasdfasdfeqwer();
+} + ')();';
+var s = document.createElement('script');
+s.textContent = injectedCode;
+(document.head || document.documentElement).appendChild(s);
+
 }
 
 /*------------------------------------------------ 
@@ -157,7 +86,13 @@ var msg="";
   msg=str;
   }
 console.log("PSJS: Gracefully stopping all JS as requested. "+msg);
-throw new Error("PSJS: Gracefully stopping all JS. "+msg);
+var injectedCode = '(' + function() {
+throw new Error("PSJS: Gracefully stopping all JS. ");
+} + ')();';
+var s = document.createElement('script');
+s.textContent = injectedCode;
+(document.head || document.documentElement).appendChild(s);
+
 }
 
 /*------------------------------------------------ 
@@ -168,28 +103,71 @@ to prevent any new eventlisteners from being added
 ------------------------------------------------*/
 function preventEventListener(){
 //window.addEventListener('contextmenu',function(e){e.stopPropagation();}, true);
-//window.addEventListener=funcion(){}; assigns a null function to event listener, stopping it to assign any new eventListener 
+//window.addEventListener=function(){}; //assigns a null function to event listener, stopping it to assign any new eventListener 
 
-console.log("PSJS: Injecting code to prevent all attempts to add an event listener.");
-  EventTarget.prototype.addEventListener=function(type,listener){
-  console.log("PSJS: An attempt to add event listener of type: \""+type+"\", with listener: \""+listener+"\"");
-  }
-
-
+console.log("PSJS: Preventing all event listeners from running.");
 var injectedCode = '(' + function() {
   EventTarget.prototype.addEventListener=function(type,listener){
   console.log("PSJS: An attempt to add event listener of type: \""+type+"\", with listener: \""+listener+"\"");
   }
 } + ')();';
 
-var script = document.createElement('script');
-script.textContent = injectedCode;
-(document.head || document.documentElement).appendChild(script);
-script.parentNode.removeChild(script);
+var s = document.createElement('script');
+s.textContent = injectedCode;
+(document.head || document.documentElement).appendChild(s);
+s.parentNode.removeChild(s);
+
+}
+
+/*------------------------------------------------ 
+pre: none
+post: assigns null function to xhr's send function
+assigns null function send function
+to prevent any new send from being added
+------------------------------------------------*/
+function preventXHRListener(){
+console.log("PSJS: Preventing all event listeners from running.");
+var injectedCode = '(' + function() {
+  XMLHttpRequest.prototype.send = function(v) {
+  console.log("PSJS: An attempt to send an AJAX call was made with value: \""+v+"\". And object:");
+  console.log(this);
+  }
+} + ')();';
+
+var s = document.createElement('script');
+s.textContent = injectedCode;
+(document.head || document.documentElement).appendChild(s);
+s.parentNode.removeChild(s);
+
+}
+
+/*------------------------------------------------ 
+pre: evntLst (list of type types to stop, from common.js) 
+post: adds stopPropagation() to the listener of each type
+goes through evntLst and assigns a stopPropagation() to each
+type 
+------------------------------------------------*/
+function stopEventListeners(obj, msg=""){
+console.log("PSJS: Stopping propagation on selected event types "+msg);
+  if(typeof obj !== 'object' || obj === null){
+  console.log("PSJS: Event list "+msg+"is empty or not an object. Quitting.");
+  }
+
+var k=Object.keys(obj);
+  if(k<=0){
+  console.log("PSJS: List of events types "+msg+"is empty. Doing nothing");
+  return 1;
+  }
+
+  for(let t of k){
+  console.log("PSJS: Stopping propagation on type \""+t+"\"" + msg);
+  window.addEventListener(t,function(e){e.stopPropagation();}, true);
+  }
 
 }
 
 
+//================================================= main code run ====================================================
 var conf={};
 
 chrome.storage.local.get(null, function(d){
@@ -203,10 +181,11 @@ console.log("PSJS: Starting...");
   //setting up conf and hash
   parseApplyList(d.applyLst);//caching applyLst into easily findable hash
   parseIgnoreList(d.ignrLst);//caching applyLst into easily findable hash
-  parseXHRList(d.xhrLst);//caching applyLst into easily findable hash
+  xhrLst=parseXHRList(d.xhrLst);//caching applyLst into easily findable hash
+  evntLst=parseEventList(d.evntLst);//caching applyLst into easily findable hash
   var host=window.location.host;
 
-  //global setting application
+  //-----global setting application-----
   if(!ignrLst.hasOwnProperty(host)){
     //breaking javascript
     if(d.breakJs){
@@ -217,37 +196,50 @@ console.log("PSJS: Starting...");
     if(d.stopJs){
     stopJs();
     }
-
+    
+    // preventing event listeners
     if(d.prvntEvnt){
     preventEventListener();
     }
+
+    //prevent XHR's send function
+    if(d.prvntXhr){
+    preventXHRListener();
+    }
+    
+    if(d.evntLstBool){
+    stopEventListeners(evntLst);
+    }
+
+    //xhrLstBool/xhrLst handled in background.js
+
   }
   else{
   console.log("PSJS: Host name on ignore list: "+host);
   }
 
+  //-----apply list-----
+
+  //breakjs
+  //stopjs
+  //stop event
+  //stop xhr/ajax
   
 
+  if(applyLst.hasOwnProperty(host)){
+  //breakjs
+  //stopjs
+  //stop event
+  //stop xhr/ajax
+ 
+
+    if(applyLst[host].applyLstEvnt){
+    stopEventListeners(applyLst[host].applyLstEvntCst, "for apply list on domain: \""+host+"\"");
+    }
+  }
+
+
 });
-
-
-
-
-
-//gracefully stop all javascript
-//throw new Error();
-//stops propagation of the event to prevent additional listeners from intercepting. 
-//don't forget to find all elements with oncontextmenu and remove it.
-//window.addEventListener('contextmenu',function(e){e.stopPropagation();}, true);
-//window.addEventListener=funcion(){}; assigns a null function to event listener, stopping it to assign any new eventListener 
-
-XMLHttpRequest.prototype.realSend = XMLHttpRequest.prototype.send;
-XMLHttpRequest.prototype.send = function(value) {
-    this.addEventListener("progress", function(){
-        console.log("Loading");
-    }, false);
-    this.realSend(value);
-};
 
 
 chrome.runtime.onMessage.addListener(runOnMsg);

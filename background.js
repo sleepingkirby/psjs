@@ -21,14 +21,16 @@ chrome.storage.local.get(null, (d) => {
     //the 2 functions below *should* run, if it were not for the fact that we 100% know both ingrLst and applyLst is empty; If the default ever changes, we can uncomment these
     //parseApplyList(obj.applyLst);
     //parseIgnoreList(obj.ignrLst);
-    //parseXHRList(obj.xhrLst);
+    //xhrLst=parseXHRList(obj.xhrLst);
+    //evntList=parseEventList(obj.evntLst);
     });
   }
   else{
   //doing this twice as there's no telling that the previouvs set will happen before this runs
   parseApplyList(d.applyLst);//caching applyLst into easily findable hash
   parseIgnoreList(d.ignrLst);//caching applyLst into easily findable hash
-  parseXHRList(d.xhrLst);//caching applyLst into easily findable hash
+  xhrLst=parseXHRList(d.xhrLst);//caching applyLst into easily findable hash
+  evntLst=parseEventList(d.evntLst);//caching applyLst into easily findable hash
   conf=d;
   }
 });
@@ -44,13 +46,17 @@ chrome.storage.onChanged.addListener(function(c,n){
     parseIgnoreList(c.ignrLst.newValue);
     }
     if(c.hasOwnProperty("xhrLst")){
-    parseXHRList(c.xhrLst.newValue);
+    xhrLst=parseXHRList(c.xhrLst.newValue);
+    }
+    if(c.hasOwnProperty("evntLst")){
+    evntLst=parseEventList(c.evntLst.newValue);
     }
     var arr=Object.keys(c);
     for(let i of arr){
     conf[i]=c[i].newValue;
     }
   }
+
 });
 
 
@@ -83,7 +89,7 @@ chrome.webRequest.onBeforeRequest.addListener(
     console.log("PSJS: Extension turned off. Nothing to be done."); 
     return {};
     }
-    
+   
     let host=hostFromURL(details.url);
     if(!ignrLst.hasOwnProperty(host)){ //if domain is in ignore list, don't run global settings
       if(conf.xhrLstBool){ //run only if xhrLstBool is turned on
@@ -103,7 +109,7 @@ chrome.webRequest.onBeforeRequest.addListener(
     }
 
     if(applyLst.hasOwnProperty(host) && applyLst.applyLstEnbld){
-      if(applyLst[host].applyLstNtwrk.hasOwnProperty(details.type)){
+      if(applyLst[host].applyLstXHR && applyLst[host].applyLstNtwrk.hasOwnProperty(details.type)){
       console.log("PSJS: network call of host \""+host+"\" with type \""+details.type+"\" blocked due to \"apply List rules\": "+details.url);
       return {cancel: true}; //return {cancel: true}; //returning {cancel: true} will prevent/stop the network call
       }
