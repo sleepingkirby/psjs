@@ -126,7 +126,7 @@ assigns null function send function
 to prevent any new send from being added
 ------------------------------------------------*/
 function preventXHRListener(){
-console.log("PSJS: Preventing all event listeners from running.");
+console.log("PSJS: Preventing all AJAX listeners from running.");
 var injectedCode = '(' + function() {
   XMLHttpRequest.prototype.send = function(v) {
   console.log("PSJS: An attempt to send an AJAX call was made with value: \""+v+"\". And object:");
@@ -153,7 +153,7 @@ console.log("PSJS: Stopping propagation on selected event types "+msg);
   console.log("PSJS: Event list "+msg+"is empty or not an object. Quitting.");
   }
 
-var k=Object.keys(obj);
+var k=Object.keys(obj).length;
   if(k<=0){
   console.log("PSJS: List of events types "+msg+"is empty. Doing nothing");
   return 1;
@@ -161,7 +161,7 @@ var k=Object.keys(obj);
 
   for(let t of k){
   console.log("PSJS: Stopping propagation on type \""+t+"\"" + msg);
-  window.addEventListener(t,function(e){e.stopPropagation();}, true);
+  window.addEventListener(t,function(e){e.stopPropagation();e.stopImmediatePropagation();}, true);
   }
 
 }
@@ -220,20 +220,53 @@ console.log("PSJS: Starting...");
 
   //-----apply list-----
 
-  //breakjs
-  //stopjs
-  //stop event
-  //stop xhr/ajax
-  
 
-  if(applyLst.hasOwnProperty(host)){
+  /*
+{www.youtube.com: {…}}
+www.youtube.com:
+applyLstBrkJs: "true"
+applyLstEnbld: "true"
+applyLstEvnt: "true"
+applyLstEvntCst:
+contextmenu: 1
+scroll: 1
+__proto__: Object
+applyLstNtwrk:
+ping: 1
+xmlhttprequest: 1
+__proto__: Object
+applyLstStpJs: "true"
+applyLstXHR: "true"
+  */
+  console.log(applyLst); 
+  if(applyLst.hasOwnProperty(host) && applyLst[host].applyLstEnbld){
+  console.log("PSJS: Domain \""+host+"\" in apply list. Applying custom settings.");
   //breakjs
-  //stopjs
-  //stop event
-  //stop xhr/ajax
- 
+    if(applyLst[host].applyLstBrkJs){
+    console.log("PSJS: Break javascript for domain \""+host+"\" is turned on.");
+    breakJs();
+    }
 
+    // stopping javascript
+    if(applyLst[host].applyLstStpJs){
+    console.log("PSJS: Stop javascript for domain \""+host+"\" is turned on.");
+    stopJs();
+    }
+
+    // preventing event listeners
     if(applyLst[host].applyLstEvnt){
+    console.log("PSJS: Preventing any event listeners for domain \""+host+"\" is turned on.");
+    preventEventListener();
+    }
+
+    //prevent XHR's send function
+    if(applyLst[host].applyLstXHR){
+    console.log("PSJS: Preventing AJAX for domain \""+host+"\" is turned on.");
+    preventXHRListener();
+    }
+
+
+    if(Object.keys(applyLst[host].applyLstEvntCst).length > 0){
     stopEventListeners(applyLst[host].applyLstEvntCst, "for apply list on domain: \""+host+"\"");
     }
   }
