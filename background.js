@@ -108,8 +108,8 @@ chrome.webRequest.onBeforeRequest.addListener(
     return {};
     }
 
-    if(applyLst.hasOwnProperty(host) && applyLst.applyLstEnbld){
-      if(applyLst[host].applyLstXHR && applyLst[host].applyLstNtwrk.hasOwnProperty(details.type)){
+    if(applyLst.hasOwnProperty(host) && applyLst[host].applyLstEnbld){
+      if(applyLst[host].applyLstNtwrk.hasOwnProperty(details.type)){
       console.log("PSJS: network call of host \""+host+"\" with type \""+details.type+"\" blocked due to \"apply List rules\": "+details.url);
       return {cancel: true}; //return {cancel: true}; //returning {cancel: true} will prevent/stop the network call
       }

@@ -53,15 +53,17 @@
 
 
 /*------------------------------------------------ 
-pre: none
+pre: validStr
 post: breaks javascript
 No, really, this functions just runs broken 
 javascript code. This is the *nuclear* option for
 pages that are really smart about running their 
 javascript code.
 ------------------------------------------------*/
-function breakJs(){
-console.log("PSJS: Breaking javascript as requested...");
+function breakJs(str){
+var msg=validStr(str);
+
+console.log("PSJS: Breaking javascript as requested "+msg);
 
 var injectedCode = '(' + function() {
 rasdfasdfasdfasdfasdfasdfasdfeqwer();
@@ -81,10 +83,8 @@ that's what breakJs() is for.
 param: str to append to message.
 ------------------------------------------------*/
 function stopJs(str){
-var msg="";
-  if( str && (typeof str === 'string' || str instanceof String) && str!=""){
-  msg=str;
-  }
+var msg=validStr(str);
+ 
 console.log("PSJS: Gracefully stopping all JS as requested. "+msg);
 var injectedCode = '(' + function() {
 throw new Error("PSJS: Gracefully stopping all JS. ");
@@ -101,11 +101,13 @@ post: assigns null function to addEventListener
 assigns null function addEventListener function
 to prevent any new eventlisteners from being added
 ------------------------------------------------*/
-function preventEventListener(){
+function preventEventListener(str){
+var msg=validStr(str);
+
 //window.addEventListener('contextmenu',function(e){e.stopPropagation();}, true);
 //window.addEventListener=function(){}; //assigns a null function to event listener, stopping it to assign any new eventListener 
 
-console.log("PSJS: Preventing all event listeners from running.");
+console.log("PSJS: Preventing all event listeners from running "+msg);
 var injectedCode = '(' + function() {
   EventTarget.prototype.addEventListener=function(type,listener){
   console.log("PSJS: An attempt to add event listener of type: \""+type+"\", with listener: \""+listener+"\"");
@@ -125,8 +127,10 @@ post: assigns null function to xhr's send function
 assigns null function send function
 to prevent any new send from being added
 ------------------------------------------------*/
-function preventXHRListener(){
-console.log("PSJS: Preventing all AJAX listeners from running.");
+function preventXHRListener(str){
+var msg=validStr(str);
+
+console.log("PSJS: Preventing all AJAX listeners from running "+msg);
 var injectedCode = '(' + function() {
   XMLHttpRequest.prototype.send = function(v) {
   console.log("PSJS: An attempt to send an AJAX call was made with value: \""+v+"\". And object:");
@@ -147,20 +151,22 @@ post: adds stopPropagation() to the listener of each type
 goes through evntLst and assigns a stopPropagation() to each
 type 
 ------------------------------------------------*/
-function stopEventListeners(obj, msg=""){
-console.log("PSJS: Stopping propagation on selected event types "+msg);
+function stopEventListeners(obj, str){
+var msg=validStr(str);
+
+console.log("PSJS: Starting event prevention on selected event types "+msg);
   if(typeof obj !== 'object' || obj === null){
   console.log("PSJS: Event list "+msg+"is empty or not an object. Quitting.");
   }
 
-var k=Object.keys(obj).length;
-  if(k<=0){
+var k=Object.keys(obj);
+  if(k.length<=0){
   console.log("PSJS: List of events types "+msg+"is empty. Doing nothing");
   return 1;
   }
 
   for(let t of k){
-  console.log("PSJS: Stopping propagation on type \""+t+"\"" + msg);
+  console.log("PSJS: Stopping Event on type \""+t+"\"" + msg);
   window.addEventListener(t,function(e){e.stopPropagation();e.stopImmediatePropagation();}, true);
   }
 
@@ -238,31 +244,26 @@ __proto__: Object
 applyLstStpJs: "true"
 applyLstXHR: "true"
   */
-  console.log(applyLst); 
   if(applyLst.hasOwnProperty(host) && applyLst[host].applyLstEnbld){
   console.log("PSJS: Domain \""+host+"\" in apply list. Applying custom settings.");
   //breakjs
     if(applyLst[host].applyLstBrkJs){
-    console.log("PSJS: Break javascript for domain \""+host+"\" is turned on.");
-    breakJs();
+    breakJs("for apply list on domain: "+host);
     }
 
     // stopping javascript
     if(applyLst[host].applyLstStpJs){
-    console.log("PSJS: Stop javascript for domain \""+host+"\" is turned on.");
-    stopJs();
+    stopJs("for apply list on domain: "+host);
     }
 
-    // preventing event listeners
+    // preventing all event listeners
     if(applyLst[host].applyLstEvnt){
-    console.log("PSJS: Preventing any event listeners for domain \""+host+"\" is turned on.");
-    preventEventListener();
+    preventEventListener("for apply list on domain: "+host);
     }
 
     //prevent XHR's send function
     if(applyLst[host].applyLstXHR){
-    console.log("PSJS: Preventing AJAX for domain \""+host+"\" is turned on.");
-    preventXHRListener();
+    preventXHRListener("for apply list on domain: "+host);
     }
 
 
