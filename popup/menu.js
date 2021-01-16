@@ -209,15 +209,6 @@ document.getElementById(lid).innerText=off;
 return false;
 }
 
-function notifyMsg(msg){
-        var notif=document.getElementsByClassName('notify')[0];
-          notif.id=''; //resets the notification area animation
-          console.log('mewate: ' + msg);
-          notif.textContent=msg;
-          notif.id='fadeOut';
-          notif.addEventListener("animationend", ()=>{notif.id='';});
-}
-
 function startListen(){
   document.addEventListener("click", (e) => {
    switch(e.target.id){
@@ -238,8 +229,6 @@ function startListen(){
         }); 
       break;
       default:
-      console.log("click");
-      console.log(e);
       break;
     }
   });
@@ -257,7 +246,6 @@ function startListen(){
         );
       break;
       default:
-      console.log(e);
       break;
     }
   });
@@ -302,7 +290,6 @@ return null;
 
 //only for applyLst
 function setIfApplyLst( obj ){
-  console.log(obj);
   //needs at least these three to do something.
   if(!obj.hasOwnProperty("host") || !obj.hasOwnProperty("id") || !obj.hasOwnProperty("list") ){
   return false;

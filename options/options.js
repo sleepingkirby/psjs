@@ -81,8 +81,11 @@ function startListen(){
         if(tmpEl.hasAttribute("name")){
         var obj={};
         obj[tmpEl.name]=value;
-          chrome.storage.local.set(obj, function(e){
+          chrome.storage.local.set(obj, function(){
             //chrome.storage.local.get(null, function(e){});
+            if(e.target.classList.contains("btnChng")){
+            e.target.classList.remove("btnChng");
+            }
           });
         }
       break;
@@ -110,6 +113,25 @@ function startListen(){
       break;
       case 'pllApply':
       getApplySetting();
+      break;
+      default:
+      break;
+    }
+  });
+
+  document.addEventListener("input", (e) => {
+    switch(e.target.type){
+      case 'text':
+      var el=e.target;
+        if(el.getAttribute("savebtn")){
+          document.getElementById(el.getAttribute("savebtn")).classList.add("btnChng");
+        }
+      break;
+      case 'textarea':
+      var el=e.target;
+        if(el.getAttribute("savebtn")){
+          document.getElementById(el.getAttribute("savebtn")).classList.add("btnChng");
+        }
       break;
       default:
       break;

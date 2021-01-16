@@ -55,7 +55,7 @@
 
         <div class="addLstnTxt">
           <div><input type="checkbox" name="evntLstBool" act="save" mMsgId="evntMsg" msgClass="toolTipFull" info="enable event propagation prevention"  ></div>
-          <div style="flex-grow: 5;"><input id="addLstnTxtInpt" name="evntLst" type="text" placeholder="ex. click|contextmenu|scroll" style="width: 100%;" mMsgId="evntMsg" msgClass="toolTipFull" info="abort, afterprint, animationend, animationiteration, animationstart, beforeprint, beforeunload, blur, canplay, canplaythrough, change, click, contextmenu, copy, cut, dblclick, drag, dragend, dragenter, dragleave, dragover, dragstart, drop, durationchange, ended, error, focus, focusin, focusout, fullscreenchange, fullscreenerror, hashchange, input, invalid, keydown, keypress, keyup, load, loadeddata, loadedmetadata, loadstart, message, mousedown, mouseenter, mouseleave, mousemove, mouseover, mouseout, mouseup, mousewheel, offline, online, open, pagehide, pageshow, paste, pause, play, playing, popstate, progress, ratechange, resize, reset, scroll, search, seeked, seeking, select, show, stalled, storage, submit, suspend, timeupdate, toggle, touchcancel, touchend, touchmove, touchstart, transitionend, unload, volumechange, waiting, wheel" /></div>
+          <div style="flex-grow: 5;"><input id="addLstnTxtInpt" name="evntLst" type="text" placeholder="ex. click|contextmenu|scroll" style="width: 100%;" mMsgId="evntMsg" msgClass="toolTipFull" savebtn="addLstnTxtInptSbmt" info="abort, afterprint, animationend, animationiteration, animationstart, beforeprint, beforeunload, blur, canplay, canplaythrough, change, click, contextmenu, copy, cut, dblclick, drag, dragend, dragenter, dragleave, dragover, dragstart, drop, durationchange, ended, error, focus, focusin, focusout, fullscreenchange, fullscreenerror, hashchange, input, invalid, keydown, keypress, keyup, load, loadeddata, loadedmetadata, loadstart, message, mousedown, mouseenter, mouseleave, mousemove, mouseover, mouseout, mouseup, mousewheel, offline, online, open, pagehide, pageshow, paste, pause, play, playing, popstate, progress, ratechange, resize, reset, scroll, search, seeked, seeking, select, show, stalled, storage, submit, suspend, timeupdate, toggle, touchcancel, touchend, touchmove, touchstart, transitionend, unload, volumechange, waiting, wheel" /></div>
           <div><input id="addLstnTxtInptSbmt" type="submit" value="save" act="save" actFor="addLstnTxtInpt" style="margin-left: 6px; width:60px;" /></div>
         </div>
 
@@ -68,7 +68,7 @@
 
         <div class="addLstnTxt">
           <div><input id="xhrLstEnbl" name="xhrLstBool" act="save" type="checkbox" mMsgId="ntwrkMsg" msgClass="toolTipFull" info="enable network call prevention" action="save" actionFor="self"></div>
-          <div style="flex-grow: 5;"><input id="addNtwrkTxtInpt" name="xhrLst" type="text" placeholder="ex. xmlhttprequest|media|websocket" style="width: 100%;" mMsgId="ntwrkMsg" msgClass="toolTipFull" info="main_frame, sub_frame, stylesheet, script, image, font, object, xmlhttprequest, ping, csp_report, media, websocket, other"/></div>
+          <div style="flex-grow: 5;"><input id="addNtwrkTxtInpt" name="xhrLst" type="text" placeholder="ex. xmlhttprequest|media|websocket" style="width: 100%;" mMsgId="ntwrkMsg" msgClass="toolTipFull" savebtn="addNtwrkTxtInptSbmt" info="main_frame, sub_frame, stylesheet, script, image, font, object, xmlhttprequest, ping, csp_report, media, websocket, other"/></div>
           <div><input id="addNtwrkTxtInptSbmt" name="addNtwrkTxtInptSbmt" type="submit" value="save" act="save" actFor="addNtwrkTxtInpt" style="margin-left: 6px; width:60px;" /></div>
         </div>
 
@@ -85,10 +85,10 @@
         </div>
 
         <div class="ignrLst">
-          <textarea id="ignrLstTA" name="ignrLst" type="text" placeholder="ex. gmail.com
+          <textarea id="ignrLstTA" name="ignrLst" type="text" savebtn="ignrLstTASbmt" placeholder="ex. gmail.com
 youtube.com"></textarea>
           <div id="ignrLstSbmt">
-          <input id="addLstnTxtInptSbmt" type="submit" value="save" act="save" actFor="ignrLstTA" style="margin-left: 6px; width:60px;" />
+          <input id="ignrLstTASbmt" type="submit" value="save" act="save" actFor="ignrLstTA" style="margin-left: 6px; width:60px;" />
           </div>
         </div>
       </div>
@@ -155,9 +155,9 @@ youtube.com"></textarea>
         </div>
 
         <div class="ignrLst">
-          <textarea id="applyLstTA" name="applyLst" type="text" placeholder="custom options by domain to be filled here..."></textarea>
+          <textarea id="applyLstTA" name="applyLst" type="text" savebtn="addLstTASbmt" placeholder="custom options by domain to be filled here..."></textarea>
           <div id="ignrLstSbmt">
-          <input id="addLstnTxtInptSbmt" type="submit" act="save" actFor="applyLstTA" value="save" style="margin-left: 6px; width:60px;" />
+          <input id="addLstTASbmt" type="submit" act="save" actFor="applyLstTA" value="save" style="margin-left: 6px; width:60px;" />
           </div>
         </div>
       </div>
