@@ -117,6 +117,50 @@ var tmpl=['applyLstDmn','applyLstEnbld', 'applyLstBrkJs', 'applyLstStpJs', 'appl
 return 0;
 }
 
+//parses the string for applyLst in chrome.storage.local into a hash that's easily searchable
+function parseApplyListSlim(str){
+  if(!str || str==""){
+  return null;
+  }
+
+console.log("PSJS: Parsing and caching custom apply list...");
+var arr=str.trim().split("\n");
+var tmpl=['Dmn','Enbld', 'BrkJs', 'StpJs', 'Evnt', 'Ajax', 'EvntLst', 'NtwrkLst'];
+ 
+  for(let ln of arr){
+  var set=ln.split(",");
+  var m=set.length;
+  applyLst[set[0]]={};
+  var tmp="";
+  var c="";
+  var f=false;
+  var str="";
+    for(var i=1; i <= 5 ; i++){
+      if(strToBool(set[i])){
+        if(f){
+        c=",";
+        }
+      tmp+=c+tmpl[i];
+      f=true;
+      }
+    }
+    for(var i=6; i<=7; i++){
+      if(set[i] && set[i]!=""){
+        if(f){
+        c=",";
+        }
+      tmp+=c+tmpl[i]+":"+set[i];
+      f=true;    
+      }
+    }
+
+  applyLst[set[0]][["str"]]=tmp;
+
+  }
+return applyLst;
+}
+
+
 /*========================================== common.js =============================*/
 
 
@@ -240,7 +284,7 @@ function getCurHost( cbFunc, cbFuncPrms ){
 
 
 //sets value to element of id, but also appends class
-function setIfIgnr( obj ){
+function setIfYes( obj ){
   //needs at least these three to do something.
   if(!obj.hasOwnProperty("host") || !obj.hasOwnProperty("id") || !obj.hasOwnProperty("class") || !obj.hasOwnProperty("list")){
   return false;
@@ -249,13 +293,28 @@ function setIfIgnr( obj ){
   if(el){
   el.innerText=obj.host;
     if(obj.list.hasOwnProperty(obj.host)){
-    el.innerText=obj.host;
     el.classList.toggle(obj.class);
     }
   return true;
   }
 return null;
 }
+
+//only for applyLst
+function setIfApplyLst( obj ){
+  console.log(obj);
+  //needs at least these three to do something.
+  if(!obj.hasOwnProperty("host") || !obj.hasOwnProperty("id") || !obj.hasOwnProperty("list") ){
+  return false;
+  }
+  var el=document.getElementById(obj.id);
+  if(el && obj.list.hasOwnProperty(obj.host) ){
+  el.innerText=obj.list[obj.host].str;
+  return true;
+  }
+return null;
+}
+
 
 //variable checks
 chrome.storage.local.get( null,(item) => {
@@ -273,11 +332,11 @@ var keys=Object.keys(item);
     }
   }
 
-  parseIgnoreList(item.ignrLst); //parse and assign ignore list
-  parseApplyList(item.applyLst);
-  getCurHost( setIfIgnr, {"id": "curHst", "class":"ignrHstYes", "list":ignrLst});
+parseIgnoreList(item.ignrLst); //parse and assign ignore list
+applyLst=parseApplyListSlim(item.applyLst);
+getCurHost( setIfYes, {"id": "curHst", "class":"ignrHstYes", "list":ignrLst});
+getCurHost( setIfApplyLst, {"id": "applyLstVal", "list": applyLst});
 });
-
 
 
 startListen();
