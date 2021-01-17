@@ -25,7 +25,7 @@
   },
   "options_page": "options/settings.html",
   "background": {
-    "scripts": ["/common.js","./background.js"],
+    "scripts": ["./common.js","./background.js"],
     "persistent": true
   },
   "content_scripts": [

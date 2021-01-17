@@ -296,9 +296,14 @@ function setIfApplyLst( obj ){
   return false;
   }
   var el=document.getElementById(obj.id);
-  if(el && obj.list.hasOwnProperty(obj.host) ){
-  el.innerText=obj.list[obj.host].str;
-  return true;
+  if(el){ 
+    if(obj.list.hasOwnProperty(obj.host)){
+    el.innerText=obj.list[obj.host].str;
+    return true;
+    }
+    else{
+    el.innerText="  none";
+    }
   }
 return null;
 }
@@ -315,7 +320,8 @@ var keys=Object.keys(item);
       tgglBtn(k, k+"Lbl", tgglHsh[k][1], tgglHsh[k][0]);
       }
       else if(typeof item[k] == "string"){
-      el.innerText=item[k];
+      let tmp=item[k]?item[k]:"  none";
+      el.innerText=tmp;
       }
     }
   }
