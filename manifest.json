@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "psjs",
   "version": "1.0",
-  "description": "Gets stuff from HTML as string",
+  "description": "Provides different methods and granularity of stopping/preventing the more annoying javascript features.",
   "permissions": [
     "storage",
     "declarativeContent",
