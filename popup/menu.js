@@ -302,7 +302,7 @@ function setIfApplyLst( obj ){
     return true;
     }
     else{
-    el.innerText="  none";
+    el.innerText="none";
     }
   }
 return null;
@@ -320,7 +320,7 @@ var keys=Object.keys(item);
       tgglBtn(k, k+"Lbl", tgglHsh[k][1], tgglHsh[k][0]);
       }
       else if(typeof item[k] == "string"){
-      let tmp=item[k]?item[k]:"  none";
+      let tmp=item[k]?item[k]:"none";
       el.innerText=tmp;
       }
     }
