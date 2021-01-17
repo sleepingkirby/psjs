@@ -14,7 +14,7 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
 //initializing the extension settings if no settings exists
 chrome.storage.local.get(null, (d) => {
   if(Object.keys(d).length <= 0){
-  var obj={"applyLst": "","breakJs": false,"evntLst": "","evntLstBool": false,"ignrLst": "","on": true,"prvntEvnt": false,"prvntXhr": false,"stopJs": false,"xhrLst": "","xhrLstBool": false};
+  var obj={"applyLst": "","breakJs": false,"evntLst": "contextmenu","evntLstBool": true,"ignrLst": "","on": true,"prvntEvnt": false,"prvntXhr": false,"stopJs": false,"xhrLst": "","xhrLstBool": false};
     chrome.storage.local.set(obj,(e)=>{
     console.log("PSJS: No settings found for extension. Initializing settings.");
     conf=obj;
@@ -62,17 +62,6 @@ chrome.storage.onChanged.addListener(function(c,n){
 
 //  chrome.webRequest.onBeforeRequest.addListener(callback, filter, opt_extraInfoSpec); 
 /*
-frameId: 29531
-initiator: "https://lovetvshow.cc"
-method: "GET"
-parentFrameId: 0
-requestId: "471764"
-tabId: 2473
-timeStamp: 1608739201986.1008
-type: "xmlhttprequest"
-url: "https://diaoshi.dehua-kuyun.com/20201012/19401_8688b4df/1000k/hls/48709064ea7000088.ts"
-__proto__: Object
-
 types:
 "main_frame", "sub_frame", "stylesheet", "script", "image", "font", "object", "xmlhttprequest", "ping", "csp_report", "media", "websocket", or "other" 
 */
@@ -90,6 +79,11 @@ chrome.webRequest.onBeforeRequest.addListener(
     return {};
     }
    
+    if(details.url.indexOf("chrome") == 0){
+    console.log("PSJS: Excluding chrome system urls.");
+    return {};
+    }
+
     let host=hostFromURL(details.url);
     if(!ignrLst.hasOwnProperty(host)){ //if domain is in ignore list, don't run global settings
       if(conf.xhrLstBool){ //run only if xhrLstBool is turned on
