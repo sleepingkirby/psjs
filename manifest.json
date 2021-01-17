@@ -14,11 +14,11 @@
     "<all_urls>"
   ],
   "icons": {
-    "96": "icons/placeholder_wob96.png"
+    "96": "icons/psjs96.png"
   },
   "browser_action": {
     "default_icon": {
-      "96":"icons/placeholder_wob96.png"
+      "96":"icons/psjs96.png"
     },
     "default_title": "psjs",
     "default_popup": "popup/menu.html"

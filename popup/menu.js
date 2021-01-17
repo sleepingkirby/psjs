@@ -120,7 +120,7 @@ return 0;
 //parses the string for applyLst in chrome.storage.local into a hash that's easily searchable
 function parseApplyListSlim(str){
   if(!str || str==""){
-  return null;
+  return {};
   }
 
 console.log("PSJS: Parsing and caching custom apply list...");
@@ -211,9 +211,10 @@ return false;
 
 function startListen(){
   document.addEventListener("click", (e) => {
+  console.log(e.target.id);
    switch(e.target.id){
-      case 'settings':
-        //chrome.runtime.openOptionsPage();     
+      case 'settingsPage':
+        chrome.runtime.openOptionsPage();     
       break;
       case 'addToIgnr':
       var host=document.getElementById("curHst").innerText;
@@ -291,7 +292,7 @@ return null;
 //only for applyLst
 function setIfApplyLst( obj ){
   //needs at least these three to do something.
-  if(!obj.hasOwnProperty("host") || !obj.hasOwnProperty("id") || !obj.hasOwnProperty("list") ){
+  if( !obj || typeof obj !== "object" || !obj.hasOwnProperty("host") || !obj.hasOwnProperty("id") || !obj.hasOwnProperty("list") ){
   return false;
   }
   var el=document.getElementById(obj.id);
