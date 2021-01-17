@@ -101,8 +101,8 @@ function startListen(){
         }
  
         if(arr[0]!=""){
-        console.log("added");
         el.value=str+arr[1]+"\n";
+        document.getElementById(e.target.getAttribute("savebtn")).classList.add("btnChng");
         }
       break;
       case 'rmClass':

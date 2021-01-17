@@ -224,7 +224,7 @@ function startListen(){
           tmp=tmp+"\n"+host;
             chrome.storage.local.set({"ignrLst": tmp.trim()}, (e) =>{
             ignrLst[host]=1;//skipping parseIgnrLst to avoid a third callback function
-            setIfIgnr({"id": "curHst", "class":"ignrHstYes", "list":ignrLst, "host":host});//doing stateless evaluation rather than straight set. prevents misrepresentation of state
+            setIfYes({"id": "curHst", "class":"ignrHstYes", "list":ignrLst, "host":host});//doing stateless evaluation rather than straight set. prevents misrepresentation of state
             });
           }
         }); 
@@ -275,7 +275,7 @@ function getCurHost( cbFunc, cbFuncPrms ){
 //sets value to element of id, but also appends class
 function setIfYes( obj ){
   //needs at least these three to do something.
-  if(!obj.hasOwnProperty("host") || !obj.hasOwnProperty("id") || !obj.hasOwnProperty("class") || !obj.hasOwnProperty("list")){
+  if(!obj || typeof obj !=="object" || !obj.hasOwnProperty("host") || !obj.hasOwnProperty("id") || !obj.hasOwnProperty("class") || !obj.hasOwnProperty("list")){
   return false;
   }
   var el=document.getElementById(obj.id);
