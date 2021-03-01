@@ -94,6 +94,7 @@ function parseApplyList(str){
 console.log("PSJS: Parsing and caching custom apply list...");
 var arr=str.trim().split("\n");
 var tmpl=['applyLstDmn','applyLstEnbld', 'applyLstBrkJs', 'applyLstStpJs', 'applyLstEvnt', 'applyLstXHR', 'applyLstEvntCst', 'applyLstNtwrk'];
+applyLst={};
  
   for(let ln of arr){
   var set=ln.split(",");
