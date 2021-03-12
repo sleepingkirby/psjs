@@ -22,26 +22,6 @@ var end=rtrn.search('/');
 return rtrn;
 }
 
-/*
-        chrome.tabs.query({active: true, currentWindow: true},(tabs) => {
-        var url=tabs[0].url;
-        var host=hostFromURL(url);
-          chrome.storage.local.get('custList',(custList) => {
-          var newCL=custList.custList;
-          newCL[host]=null;
-            var notif=document.getElementsByClassName('notify')[0];
-            notif.id=''; //resets the notification area animation
-            chrome.storage.local.set({custList: newCL},()=>{
-            console.log('butWhyMod: added host to custom List ' + host);
-            notif.textContent='\'' + host + '\' added to white list.';
-            notif.id='fadeOut';
-            notif.addEventListener("animationend", ()=>{
-            notif.id='';
-            });
-            })
-          });
-        });
-*/
 
 function compileOpts(){
 var dmn=document.getElementById('applyLstDmn').value;

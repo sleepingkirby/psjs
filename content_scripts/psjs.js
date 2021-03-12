@@ -151,10 +151,7 @@ return 0;
   runs pageDone after "secs" amount of time
   -----------------------*/
   async function delayRun(secs=6500) {
-
-    console.log('butWhyMod: Setting time for delayed modal removal for ' + secs + " milliseconds");
     await sleep(secs);
-    console.log('butWhyMod: Time\'s up. Running delayed modal removal.');
     pageDone();
   }
 

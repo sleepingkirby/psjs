@@ -164,13 +164,6 @@ return applyLst;
 /*========================================== common.js =============================*/
 
 
-/*
-function notify(str){
-console.log(str);
-alert(str);
-}
-*/
-
 var tgglHsh={};
 tgglHsh['on']={0:"off", 1:"on"};
 tgglHsh['breakJs']={0:"brkJs", 1:"brkJs"};
@@ -211,7 +204,6 @@ return false;
 
 function startListen(){
   document.addEventListener("click", (e) => {
-  console.log(e.target.id);
    switch(e.target.id){
       case 'settingsPage':
         chrome.runtime.openOptionsPage();     
@@ -228,6 +220,9 @@ function startListen(){
             });
           }
         }); 
+      break;
+      case 'donate':
+        chrome.tabs.create({url: 'https://b3spage.sourceforge.io/index.html?psjs'});
       break;
       default:
       break;

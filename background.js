@@ -102,6 +102,7 @@ chrome.webRequest.onBeforeRequest.addListener(
     return {};
     }
 
+      console.log("PSJS: =======>> host: \""+host+"\"");
     if(applyLst.hasOwnProperty(host) && applyLst[host].applyLstEnbld){
       if(applyLst[host].applyLstNtwrk.hasOwnProperty(details.type)){
       console.log("PSJS: network call of host \""+host+"\" with type \""+details.type+"\" blocked due to \"apply List rules\": "+details.url);

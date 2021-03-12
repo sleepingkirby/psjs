@@ -216,6 +216,10 @@ max-height: 0px;
 margin-bottom: 0px;
 }
 
+.about{
+justify-content: flex-end;
+}
+
 @keyframes opac{
 0%{opacity:1; max-height: 200px; margin-bottom: 4px;}
 99%{opacity:0; max-height: 200px; margin-bottom: 4px;}
