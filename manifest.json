@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "psjs",
-  "version": "1.0",
+  "version": "1.1",
   "description": "Provides different methods and granularity of stopping/preventing the more annoying javascript features.",
   "permissions": [
     "storage",
