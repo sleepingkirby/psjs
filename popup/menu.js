@@ -174,7 +174,7 @@ tgglHsh['evntLstBool']={0:"evnt", 1:"evnt"};
 tgglHsh['xhrLstBool']={0:"ajax", 1:"ajax"};
 
 function reportErr(error){
-console.error('pollTags: Failed to insert content script into tab/page: ' + error.message);
+console.error('PSJS: Failed to insert content script into tab/page: ' + error.message);
 }
 
 function onError(item){
