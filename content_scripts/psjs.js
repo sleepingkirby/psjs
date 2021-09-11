@@ -278,6 +278,7 @@ window.setIntervalPSJSBKUP=window.setInterval;
   console.log("PSJS: An attempt to use setInterval() was made with interval: \""+tm+"\". With function and options of: ");
   console.log(func);
   console.log(opts);
+  return 1;
   }
 }+')();';
 
