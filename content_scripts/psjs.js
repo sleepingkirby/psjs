@@ -95,7 +95,7 @@ function parseApplyList(str){
 
 console.log("PSJS: Parsing and caching custom apply list...");
 var arr=str.trim().split("\n");
-var tmpl=['applyLstDmn','applyLstEnbld', 'applyLstBrkJs', 'applyLstStpJs', 'applyLstEvnt', 'applyLstXHR', 'applyLstEvntCst', 'applyLstNtwrk'];
+var tmpl=['applyLstDmn','applyLstEnbld', 'applyLstBrkJs', 'applyLstStpJs', 'applyLstEvnt', 'applyLstXHR', 'applyLstSetIntrvl', 'applyLstEvntCst', 'applyLstNtwrk'];
  
   for(let ln of arr){
   var set=ln.split(",");
@@ -106,15 +106,16 @@ var tmpl=['applyLstDmn','applyLstEnbld', 'applyLstBrkJs', 'applyLstStpJs', 'appl
   applyLst[set[0]][tmpl[3]]=strToBool(set[3]);
   applyLst[set[0]][tmpl[4]]=strToBool(set[4]);
   applyLst[set[0]][tmpl[5]]=strToBool(set[5]);
-  applyLst[set[0]][tmpl[6]]={};
+  applyLst[set[0]][tmpl[6]]=strToBool(set[6]);
   applyLst[set[0]][tmpl[7]]={};
-
-    if(set.length>=7){
-    applyLst[set[0]][tmpl[6]]=parseEventList(set[6], "for apply list"); 
-    }
+  applyLst[set[0]][tmpl[8]]={};
 
     if(set.length>=8){
-    applyLst[set[0]][tmpl[7]]=parseXHRList(set[7], "for apply list"); 
+    applyLst[set[0]][tmpl[7]]=parseEventList(set[7], "for apply list"); 
+    }
+
+    if(set.length>=9){
+    applyLst[set[0]][tmpl[8]]=parseXHRList(set[8], "for apply list"); 
     }
   }
 return 0;
@@ -261,6 +262,33 @@ s.parentNode.removeChild(s);
 
 }
 
+
+/*------------------------------------------------ 
+pre: none
+post: assigns nothing to setInterval()
+assi
+------------------------------------------------*/
+function stopSetInterval(str){
+var msg=validStr(str);
+
+console.log("PSJS: Preventing setInterval() from running "+msg);
+var injectedCode = '('+ function(){
+window.setIntervalPSJSBKUP=window.setInterval;
+  window.setInterval=function(func,tm,opts){
+  console.log("PSJS: An attempt to use setInterval() was made with interval: \""+tm+"\". With function and options of: ");
+  console.log(func);
+  console.log(opts);
+  }
+}+')();';
+
+var s = document.createElement('script');
+s.textContent = injectedCode;
+(document.head || document.documentElement).appendChild(s);
+s.parentNode.removeChild(s);
+}
+
+
+
 /*------------------------------------------------ 
 pre: evntLst (list of type types to stop, from common.js) 
 post: adds stopPropagation() to the listener of each type
@@ -291,6 +319,8 @@ var k=Object.keys(obj);
 
 //================================================= main code run ====================================================
 var conf={};
+
+var tmpVar="asdfasdfa";
 
 chrome.storage.local.get(null, function(d){
 console.log("PSJS: Starting...");
@@ -328,10 +358,17 @@ console.log("PSJS: Starting...");
     if(d.prvntXhr){
     preventXHRListener();
     }
-    
+   
+    //stops setInterval() 
+    if(d.prvntSetIntrvl){
+    stopSetInterval();
+    }
+
     if(d.evntLstBool){
     stopEventListeners(evntLst);
     }
+
+
 
     //xhrLstBool/xhrLst handled in background.js
 
@@ -382,6 +419,10 @@ applyLstXHR: "true"
     preventXHRListener("for apply list on domain: "+host);
     }
 
+    //prevent setInterval()
+    if(applyLst[host].applyLstSetIntrvl){
+    stopSetInterval("for apply list on domain: "+host);
+    }
 
     if(Object.keys(applyLst[host].applyLstEvntCst).length > 0){
     stopEventListeners(applyLst[host].applyLstEvntCst, "for apply list on domain: \""+host+"\"");

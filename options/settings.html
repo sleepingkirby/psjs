@@ -43,6 +43,12 @@
             <div mMsgId="glblMsg" msgClass="toolTipFull" info="This overrides the existing ajax funtions with nothing functional. It'll send a console message that an attempt was made and where to and that's it." >prevent xhr/ajax: </div>
             <input id="prvntXHR" name="prvntXhr" act="save" type="checkbox" mMsgId="glblMsg" msgClass="toolTipFull" info="This overrides the existing ajax funtions with nothing functional. It'll send a console message that an attempt was made and where to and that's it."/>
           </div>
+
+          <div class="fRow">
+            <div mMsgId="glblMsg" msgClass="toolTipFull" info="This overrides setInterval(), making all function that run every x seconds do nothing." >prevent setInterval: </div>
+            <input id="prvntSetIntrvl" name="prvntSetIntrvl" act="save" type="checkbox" mMsgId="glblMsg" msgClass="toolTipFull" info="This overrides setInterval(), making all function that run every x seconds do nothing."/>
+          </div>
+
         </div>
        
         <div id="glblMsg" msgId="glblMsg"  class="toolTip" ></div>
@@ -128,6 +134,11 @@ youtube.com"></textarea>
           <div class="fRow">
             <div id="applyLstXHRLbl" mMsgId="applyLstMsg" msgClass="toolTipFull" info="stop XHR/AJAX option. Refer to global's &quot;XHR/Ajax&quot; for full info" >xhr/ajax: </div>
             <input id="applyLstXHR" type="checkbox" mMsgId="applyLstMsg" msgClass="toolTipFull" info="stop XHR/AJAX option. Refer to global's &quot;prevent xhr/ajax&quot; for full info"/>
+          </div>
+
+          <div class="fRow">
+            <div id="applyLstSetIntrvlLbl" mMsgId="applyLstMsg" msgClass="toolTipFull" info="This overrides setInterval(), making all function that run every x seconds do nothing." >setInterval: </div>
+            <input id="applyLstSetIntrvl" type="checkbox" mMsgId="applyLstMsg" msgClass="toolTipFull" info="This overrides setInterval(), making all function that run every x seconds do nothing."/>
           </div>
 
 

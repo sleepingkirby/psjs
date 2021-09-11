@@ -170,6 +170,7 @@ tgglHsh['breakJs']={0:"brkJs", 1:"brkJs"};
 tgglHsh['stopJs']={0:"stpJs", 1:"stpJs"};
 tgglHsh['prvntEvnt']={0:"event", 1:"event"};
 tgglHsh['prvntXhr']={0:"ajax", 1:"ajax"};
+tgglHsh['prvntSetIntrvl']={0:"setInterval", 1:"setInterval"};
 tgglHsh['evntLstBool']={0:"evnt", 1:"evnt"};
 tgglHsh['xhrLstBool']={0:"ajax", 1:"ajax"};
 

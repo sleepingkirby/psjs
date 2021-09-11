@@ -28,7 +28,7 @@ var dmn=document.getElementById('applyLstDmn').value;
   if(!dmn || dmn==""){
   return ['',''];
   }
-var arr=['applyLstEnbld', 'applyLstBrkJs', 'applyLstStpJs', 'applyLstEvnt', 'applyLstXHR', 'applyLstEvntCst', 'applyLstNtwrk'];
+var arr=['applyLstEnbld', 'applyLstBrkJs', 'applyLstStpJs', 'applyLstEvnt', 'applyLstXHR', 'applyLstSetIntrvl', 'applyLstEvntCst', 'applyLstNtwrk'];
 var kv={};
 var str=dmn;
 var v="";
@@ -168,6 +168,7 @@ document.getElementById("applyLstBrkJs").checked=document.getElementById("breakJ
 document.getElementById("applyLstStpJs").checked=document.getElementById("stopJs").checked;
 document.getElementById("applyLstEvnt").checked=document.getElementById("prvntEventLstnr").checked;
 document.getElementById("applyLstXHR").checked=document.getElementById("prvntXHR").checked;
+document.getElementById("applyLstSetIntrvl").checked=document.getElementById("prvntSetIntrvl").checked;
 document.getElementById("applyLstEvntCst").value=document.getElementById("addLstnTxtInpt").value;
 document.getElementById("applyLstNtwrk").value=document.getElementById("addNtwrkTxtInpt").value;
 }
@@ -181,6 +182,7 @@ document.getElementById("applyLstBrkJs").checked=false;
 document.getElementById("applyLstStpJs").checked=false;
 document.getElementById("applyLstEvnt").checked=false;
 document.getElementById("applyLstXHR").checked=false;
+document.getElementById("applyLstSetIntrvl").checked=false;
 document.getElementById("applyLstEvntCst").value="";
 document.getElementById("applyLstNtwrk").value="";
 }
